@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Detail — Axel Ariel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-transition"></div>
+<nav class="navbar solid">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">Axel Ariel</a>
+      <span class="nav-logo-sub">Freelance Fotografer &amp; Videografer</span>
+    </div>
+    <div class="nav-center">
+      <a href="index.html" class="nav-link">Beranda</a>
+      <a href="work.html" class="nav-link active">Karya</a>
+      <a href="about.html" class="nav-link">Tentang</a>
+      <a href="contact.html" class="nav-link">Kontak</a>
+    </div>
+    <a href="contact.html" class="nav-btn-hire">Hire Me</a>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Beranda</a><a href="work.html">Karya</a><a href="about.html">Tentang</a><a href="contact.html">Kontak</a>
+</div>
+
+<div class="breadcrumb-bar" id="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="work.html">Karya</a><span>/</span><span id="bcCat">Video</span><span>/</span><span id="bcTitle">Detail</span>
+  </div>
+</div>
+
+<div class="video-detail-wrap">
+  <div class="video-detail-inner" id="videoContent">
+    <p class="loading-text">Memuat video...</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding:1.25rem 2rem;">
+    <span>&copy; 2025 Axel Ariel.</span><span>Batam, Indonesia</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/6285542200957" target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.527 5.845L.057 23.272a.75.75 0 00.916.948l5.598-1.469A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.661-.513-5.185-1.407l-.371-.22-3.847 1.01.976-3.734-.242-.384A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  WhatsApp
+</a>
+
+<script src="main.js"></script>
+<script>
+const GRADIENTS={wedding:'linear-gradient(135deg,#C17A3C,#8B5E3C)',prewedding:'linear-gradient(135deg,#D4A574,#B8926A)',corporate:'linear-gradient(135deg,#5C4B3A,#3D3025)',event:'linear-gradient(135deg,#8B6B4A,#6B4E35)',documentary:'linear-gradient(135deg,#7B5E42,#5A4330)',socialmedia:'linear-gradient(135deg,#E8CFA0,#C8A870)'};
+const CAT_LABELS={wedding:'Wedding',prewedding:'Prewedding',corporate:'Corporate',event:'Event',documentary:'Documentary',socialmedia:'Social Media'};
+const CAT_PAGES={wedding:'video-wedding.html',prewedding:'video-prewedding.html',corporate:'video-corporate.html',event:'video-event.html',documentary:'video-documentary.html',socialmedia:'video-socialmedia.html'};
+
+const params = new URLSearchParams(location.search);
+const videoId = params.get('id');
+
+fetch('data.json').then(r=>r.json()).then(data=>{
+  const video = data.videos.find(v=>v.id===videoId);
+  if(!video){
+    document.getElementById('videoContent').innerHTML='<div class="empty-state"><div class="empty-state-title">Video tidak ditemukan</div><p class="empty-state-sub"><a href="work.html" style="color:var(--accent);">Kembali ke Karya</a></p></div>';
+    return;
+  }
+  document.title = video.title + ' — Axel Ariel';
+  document.getElementById('bcCat').textContent = CAT_LABELS[video.category]||'Video';
+  document.getElementById('bcTitle').textContent = video.title;
+
+  // Prev/next in same category
+  const samecat = data.videos.filter(v=>v.category===video.category);
+  const idx = samecat.findIndex(v=>v.id===video.id);
+  const prev = samecat[idx-1];
+  const next = samecat[idx+1];
+
+  const tools = (video.tools||[]).map(t=>`<span class="meta-pill">${t}</span>`).join('');
+
+  document.getElementById('videoContent').innerHTML = `
+    <h1 class="video-detail-title">${video.title}</h1>
+    <div class="video-detail-meta">
+      ${video.featured?'<span class="meta-pill featured">Featured</span>':''}
+      <span class="meta-pill">${CAT_LABELS[video.category]||video.category}</span>
+      <span class="meta-pill">${video.year}</span>
+      <span class="meta-pill">${video.location}</span>
+      <span class="meta-pill">${video.duration}</span>
+    </div>
+
+    <div class="video-embed-wrap" id="embedWrap">
+      <div class="video-embed-placeholder" id="embedPlaceholder" style="background:${GRADIENTS[video.category]||'linear-gradient(135deg,#C17A3C,#8B5E3C)'};" onclick="loadVideo()">
+        <div class="video-embed-play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-2col">
+      <div>
+        <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--text);margin-bottom:0.75rem;">Tentang Video</h3>
+        <p class="video-desc">${video.description}</p>
+      </div>
+      <div>
+        <div class="video-info-box">
+          <div class="video-info-item"><div class="video-info-label">Kategori</div><div class="video-info-value">${CAT_LABELS[video.category]||video.category}</div></div>
+          <div class="video-info-item"><div class="video-info-label">Tahun</div><div class="video-info-value">${video.year}</div></div>
+          <div class="video-info-item"><div class="video-info-label">Lokasi</div><div class="video-info-value">${video.location}</div></div>
+          <div class="video-info-item"><div class="video-info-label">Durasi</div><div class="video-info-value">${video.duration}</div></div>
+          <div class="video-info-item">
+            <div class="video-info-label">Tools</div>
+            <div class="video-info-value" style="display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.25rem;">${tools}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-cta-box">
+      <h3>Suka hasilnya? Chat di <em>WhatsApp</em></h3>
+      <a href="https://wa.me/6285542200957?text=Halo%20Axel%2C%20saya%20tertarik%20dengan%20video%20${encodeURIComponent(video.title)}" target="_blank" class="btn btn-amber">Hubungi via WhatsApp</a>
+    </div>
+
+    <div class="video-nav-row">
+      ${prev?`<a href="video-detail.html?id=${prev.id}" class="video-nav-btn"><span class="video-nav-label">&#8592; Sebelumnya</span><span class="video-nav-title">${prev.title}</span></a>`:'<div></div>'}
+      ${next?`<a href="video-detail.html?id=${next.id}" class="video-nav-btn" style="text-align:right;"><span class="video-nav-label">Berikutnya &#8594;</span><span class="video-nav-title">${next.title}</span></a>`:'<div></div>'}
+    </div>
+  `;
+
+  window.loadVideo = function(){
+    if(!video.youtube_id||video.youtube_id==='YOUTUBE_ID_DI_SINI'){
+      alert('YouTube ID belum dikonfigurasi untuk video ini.');
+      return;
+    }
+    var wrap = document.getElementById('embedWrap');
+    wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/'+video.youtube_id+'?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:none;"></iframe>';
+  };
+}).catch(()=>{
+  document.getElementById('videoContent').innerHTML='<p class="loading-text">Gagal memuat data.</p>';
+});
+</script>
+</body>
+</html>

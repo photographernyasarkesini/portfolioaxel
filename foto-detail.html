@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foto Detail — Axel Ariel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .foto-placeholder { width: 100%; display: block; border-radius: 6px; }
+    .foto-nav-prev, .foto-nav-next { display: flex; flex-direction: column; gap: 0.35rem; flex: 1; padding: 1rem 1.25rem; border: 1px solid rgba(28,22,18,0.1); border-radius: 8px; text-decoration: none; background: var(--surface); transition: border-color 0.2s; }
+    .foto-nav-prev:hover, .foto-nav-next:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+<div class="page-transition"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">&#10005;</button>
+  <button class="lightbox-nav lightbox-prev" id="lbPrev">&#8592;</button>
+  <button class="lightbox-nav lightbox-next" id="lbNext">&#8594;</button>
+  <div class="lightbox-img-wrap" id="lbImgWrap"></div>
+  <div class="lightbox-counter" id="lbCounter"></div>
+  <div class="lightbox-dots" id="lbDots"></div>
+</div>
+
+<nav class="navbar solid">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">Axel Ariel</a>
+      <span class="nav-logo-sub">Freelance Fotografer &amp; Videografer</span>
+    </div>
+    <div class="nav-center">
+      <a href="index.html" class="nav-link">Beranda</a>
+      <a href="work.html" class="nav-link active">Karya</a>
+      <a href="about.html" class="nav-link">Tentang</a>
+      <a href="contact.html" class="nav-link">Kontak</a>
+    </div>
+    <a href="contact.html" class="nav-btn-hire">Hire Me</a>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Beranda</a><a href="work.html">Karya</a><a href="about.html">Tentang</a><a href="contact.html">Kontak</a>
+</div>
+
+<div class="breadcrumb-bar" id="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="work.html">Karya</a><span>/</span><span id="bcCat">Foto</span><span>/</span><span id="bcTitle">Album</span>
+  </div>
+</div>
+
+<div class="foto-detail-wrap">
+  <div class="section-inner" id="albumContent" style="padding-top:2rem;padding-bottom:5rem;">
+    <p class="loading-text">Memuat album...</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding:1.25rem 2rem;">
+    <span>&copy; 2025 Axel Ariel.</span><span>Batam, Indonesia</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/6285542200957" target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.527 5.845L.057 23.272a.75.75 0 00.916.948l5.598-1.469A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.661-.513-5.185-1.407l-.371-.22-3.847 1.01.976-3.734-.242-.384A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  WhatsApp
+</a>
+
+<script src="main.js"></script>
+<script>
+const CAT_PAGES={wedding:'foto-wedding.html',prewedding:'foto-prewedding.html',portrait:'foto-portrait.html',graduation:'foto-graduation.html',event:'foto-event.html',product:'foto-product.html'};
+const CAT_LABELS={wedding:'Wedding',prewedding:'Prewedding',portrait:'Portrait',graduation:'Graduation',event:'Event',product:'Product'};
+const PHOTO_GRADIENTS=['linear-gradient(160deg,#C17A3C,#8B5E3C)','linear-gradient(160deg,#D4A574,#B8926A)','linear-gradient(160deg,#8B6B4A,#6B4E35)','linear-gradient(160deg,#5C4B3A,#3D3025)','linear-gradient(160deg,#7B5E42,#5A4330)','linear-gradient(160deg,#E8CFA0,#C8A870)','linear-gradient(160deg,#B8926A,#C17A3C)','linear-gradient(160deg,#D4A574,#956030)'];
+const PHOTO_HEIGHTS=[200,280,180,240,200,260,220,190];
+
+const params=new URLSearchParams(location.search);
+const albumId=params.get('id');
+
+// Lightbox state
+let lbPhotos=[];
+let lbIdx=0;
+
+function openLightbox(idx){
+  lbIdx=idx;
+  renderLb();
+  document.getElementById('lightbox').classList.add('open');
+}
+function renderLb(){
+  const wrap=document.getElementById('lbImgWrap');
+  const counter=document.getElementById('lbCounter');
+  const dots=document.getElementById('lbDots');
+  const src=lbPhotos[lbIdx];
+  wrap.innerHTML=`<img src="${src}" style="max-width:min(900px,90vw);max-height:85vh;object-fit:contain;border-radius:8px;display:block;" alt="Foto ${lbIdx+1}">`;
+  counter.textContent='FOTO '+(lbIdx+1)+' / '+lbPhotos.length;
+  dots.innerHTML=lbPhotos.map((_,i)=>`<span class="lightbox-dot${i===lbIdx?' active':''}" onclick="lbGo(${i})"></span>`).join('');
+}
+window.lbGo=function(i){lbIdx=i;renderLb();};
+document.getElementById('lbPrev').onclick=function(){lbIdx=(lbIdx-1+lbPhotos.length)%lbPhotos.length;renderLb();};
+document.getElementById('lbNext').onclick=function(){lbIdx=(lbIdx+1)%lbPhotos.length;renderLb();};
+document.getElementById('lbClose').onclick=function(){document.getElementById('lightbox').classList.remove('open');};
+document.addEventListener('keydown',function(e){
+  if(!document.getElementById('lightbox').classList.contains('open'))return;
+  if(e.key==='ArrowLeft'){lbIdx=(lbIdx-1+lbPhotos.length)%lbPhotos.length;renderLb();}
+  if(e.key==='ArrowRight'){lbIdx=(lbIdx+1)%lbPhotos.length;renderLb();}
+  if(e.key==='Escape'){document.getElementById('lightbox').classList.remove('open');}
+});
+
+fetch('data.json').then(r=>r.json()).then(data=>{
+  const album=data.albums.find(a=>a.id===albumId);
+  if(!album){
+    document.getElementById('albumContent').innerHTML='<div class="empty-state"><div class="empty-state-title">Album tidak ditemukan</div><p class="empty-state-sub"><a href="work.html" style="color:var(--accent);">Kembali ke Karya</a></p></div>';
+    return;
+  }
+  document.title=album.title+' — Axel Ariel';
+  document.getElementById('bcCat').textContent=CAT_LABELS[album.category]||'Foto';
+  document.getElementById('bcTitle').textContent=album.title;
+
+  lbPhotos=album.photos||[];
+  const photoCount=lbPhotos.length;
+
+  // prev/next album in same category
+  const samecat=data.albums.filter(a=>a.category===album.category);
+  const idx=samecat.findIndex(a=>a.id===album.id);
+  const prev=samecat[idx-1];
+  const next=samecat[idx+1];
+
+  // Build masonry items
+  let masonryHtml='';
+  for(let i=0;i<photoCount;i++){
+    const src=lbPhotos[i];
+    masonryHtml+=`
+      <div class="foto-masonry-item" onclick="openLightbox(${i})">
+        <img src="${src}" alt="Foto ${i+1}" loading="lazy">
+        <div class="foto-masonry-ov">
+          <span class="foto-masonry-num">${String(i+1).padStart(2,'0')}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  document.getElementById('albumContent').innerHTML=`
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;">
+      <div>
+        <p class="section-label">${CAT_LABELS[album.category]||'Foto'}</p>
+        <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);color:var(--text);line-height:1.1;margin-bottom:0.5rem;">${album.title}</h1>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+          <span class="meta-pill">${album.year}</span>
+          <span class="meta-pill">${album.location}</span>
+          ${album.client?`<span class="meta-pill">${album.client}</span>`:''}
+          <span class="meta-pill">${photoCount} foto</span>
+        </div>
+      </div>
+      <a href="https://wa.me/6285542200957?text=Halo%20Axel%2C%20saya%20tertarik%20dengan%20album%20${encodeURIComponent(album.title)}" target="_blank" class="btn btn-amber" style="margin-top:0.5rem;">Chat WhatsApp</a>
+    </div>
+
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:2rem;">${album.description}</p>
+
+    <div class="foto-masonry">${masonryHtml}</div>
+
+    <div style="margin-top:3rem;background:var(--bg-dark);border-radius:12px;padding:2.5rem;text-align:center;">
+      <h3 style="font-family:var(--font-display);font-size:1.5rem;color:#FDFAF6;margin-bottom:1rem;">Suka hasilnya? Chat di <em style="color:var(--accent);">WhatsApp</em></h3>
+      <a href="https://wa.me/6285542200957" target="_blank" class="btn btn-amber">Hubungi via WhatsApp</a>
+    </div>
+
+    ${(prev||next)?`
+    <div class="video-nav-row" style="margin-top:2rem;">
+      ${prev?`<a href="foto-detail.html?id=${prev.id}" class="foto-nav-prev"><span class="video-nav-label">&#8592; Album Sebelumnya</span><span class="video-nav-title">${prev.title}</span></a>`:'<div></div>'}
+      ${next?`<a href="foto-detail.html?id=${next.id}" class="foto-nav-next" style="text-align:right;"><span class="video-nav-label">Album Berikutnya &#8594;</span><span class="video-nav-title">${next.title}</span></a>`:'<div></div>'}
+    </div>`:''}
+  `;
+}).catch(()=>{
+  document.getElementById('albumContent').innerHTML='<p class="loading-text">Gagal memuat data.</p>';
+});
+</script>
+</body>
+</html>

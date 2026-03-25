@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — Axel Ariel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#F4EFE6;--text:#1C1612;--text-muted:#8C7B6B;--accent:#C17A3C;
+      --dark:#0D0805;--surface:#FDFAF6;
+      --font-display:'DM Serif Display',serif;
+      --font-quote:'Cormorant Garamond',serif;
+      --font-body:'Inter',sans-serif;
+      --font-mono:'Space Mono',monospace;
+    }
+    html,body{height:100%;font-family:var(--font-body);}
+    body{display:flex;min-height:100vh;}
+
+    /* LEFT PANEL */
+    .login-left{
+      flex:0 0 50%;background:var(--dark);
+      display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+      padding:4rem;position:relative;overflow:hidden;
+    }
+    .login-left-watermark{
+      position:absolute;right:-0.1em;bottom:-0.1em;
+      font-family:var(--font-display);font-size:22vw;line-height:1;
+      color:rgba(255,255,255,0.03);pointer-events:none;user-select:none;
+      letter-spacing:-0.05em;
+    }
+    .login-left-logo{
+      font-family:var(--font-display);font-size:2rem;color:#FDFAF6;
+      margin-bottom:0.25rem;text-decoration:none;
+    }
+    .login-left-label{
+      font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;
+      text-transform:uppercase;color:var(--accent);margin-bottom:3rem;
+    }
+    .login-left-quote{
+      font-family:var(--font-quote);font-style:italic;font-size:1.3rem;
+      color:rgba(253,250,246,0.7);line-height:1.7;max-width:320px;
+      border-left:2px solid rgba(193,122,60,0.4);padding-left:1.25rem;
+      margin-bottom:3rem;
+    }
+    .login-left-divider{
+      width:40px;height:1px;background:rgba(193,122,60,0.4);margin-bottom:1.5rem;
+    }
+    .login-left-meta{
+      font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;
+      text-transform:uppercase;color:rgba(253,250,246,0.3);
+    }
+
+    /* RIGHT PANEL */
+    .login-right{
+      flex:1;background:var(--bg);
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      padding:4rem;
+    }
+    .login-form-wrap{width:100%;max-width:380px;}
+    .login-form-label{
+      font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;
+      text-transform:uppercase;color:var(--text-muted);margin-bottom:0.5rem;
+    }
+    .login-form-title{
+      font-family:var(--font-display);font-size:2.2rem;color:var(--text);
+      margin-bottom:2.5rem;line-height:1.1;
+    }
+    .form-group{margin-bottom:1.25rem;}
+    .form-label{
+      display:block;font-family:var(--font-mono);font-size:10px;
+      letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);
+      margin-bottom:0.5rem;
+    }
+    .form-input{
+      width:100%;padding:0.75rem 1rem;
+      border:1px solid rgba(28,22,18,0.15);border-radius:6px;
+      background:var(--surface);color:var(--text);
+      font-family:var(--font-body);font-size:14px;
+      outline:none;transition:border-color 0.2s;
+    }
+    .form-input:focus{border-color:var(--accent);}
+    .form-input[readonly]{color:var(--text-muted);cursor:default;}
+    .pw-wrap{position:relative;}
+    .pw-wrap .form-input{padding-right:3rem;}
+    .pw-toggle{
+      position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);
+      background:none;border:none;cursor:pointer;color:var(--text-muted);
+      display:flex;align-items:center;padding:0;
+      transition:color 0.2s;
+    }
+    .pw-toggle:hover{color:var(--accent);}
+    .btn-login{
+      width:100%;padding:0.875rem 1.5rem;
+      background:var(--dark);color:#FDFAF6;
+      border:none;border-radius:6px;cursor:pointer;
+      font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;
+      text-transform:uppercase;margin-top:0.75rem;
+      transition:background 0.2s,color 0.2s;
+    }
+    .btn-login:hover{background:var(--accent);color:#1A0F08;}
+    .login-error{
+      margin-top:1rem;padding:0.75rem 1rem;
+      background:rgba(193,122,60,0.1);border:1px solid rgba(193,122,60,0.3);
+      border-radius:6px;font-size:13px;color:var(--accent);
+      display:none;
+    }
+    .login-error.show{display:block;}
+    .login-back{
+      margin-top:2rem;text-align:center;
+      font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--text-muted);
+    }
+    .login-back a{color:var(--text-muted);text-decoration:none;transition:color 0.2s;}
+    .login-back a:hover{color:var(--accent);}
+
+    @media(max-width:768px){
+      body{flex-direction:column;}
+      .login-left{flex:0 0 auto;padding:3rem 2rem 2.5rem;}
+      .login-left-watermark{font-size:30vw;}
+      .login-left-quote{font-size:1.1rem;}
+      .login-right{padding:2.5rem 1.5rem;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- LEFT -->
+<div class="login-left">
+  <div class="login-left-watermark">AA</div>
+  <a href="../index.html" class="login-left-logo">Axel Ariel</a>
+  <p class="login-left-label">Admin Panel</p>
+  <blockquote class="login-left-quote">
+    "Setiap frame yang kamu tambahkan adalah cerita yang akan dikenang."
+  </blockquote>
+  <div class="login-left-divider"></div>
+  <p class="login-left-meta">Batam, Indonesia &middot; &copy; 2025</p>
+</div>
+
+<!-- RIGHT -->
+<div class="login-right">
+  <div class="login-form-wrap">
+    <p class="login-form-label">Admin Panel</p>
+    <h1 class="login-form-title">Selamat<br>Datang</h1>
+
+    <form id="loginForm" onsubmit="doLogin(event)">
+      <div class="form-group">
+        <label class="form-label" for="username">Username</label>
+        <input class="form-input" type="text" id="username" value="axelariel" readonly>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <div class="pw-wrap">
+          <input class="form-input" type="password" id="password" placeholder="Masukkan password" autocomplete="current-password">
+          <button type="button" class="pw-toggle" onclick="togglePw()" id="pwToggle" title="Tampilkan/sembunyikan password">
+            <svg id="eyeIcon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <button type="submit" class="btn-login">Masuk &rarr;</button>
+      <div class="login-error" id="loginError">Password salah. Coba lagi.</div>
+    </form>
+
+    <p class="login-back"><a href="../index.html">&larr; Kembali ke website</a></p>
+  </div>
+</div>
+
+<script>
+function togglePw(){
+  var inp=document.getElementById('password');
+  var icon=document.getElementById('eyeIcon');
+  if(inp.type==='password'){
+    inp.type='text';
+    icon.innerHTML='<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+  } else {
+    inp.type='password';
+    icon.innerHTML='<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  }
+}
+function doLogin(e){
+  e.preventDefault();
+  var pw=document.getElementById('password').value;
+  var err=document.getElementById('loginError');
+  if(pw==='axelariel2025'){
+    sessionStorage.setItem('admin_auth','1');
+    window.location.href='dashboard.html';
+  } else {
+    err.classList.add('show');
+    document.getElementById('password').value='';
+    document.getElementById('password').focus();
+  }
+}
+// If already logged in, redirect
+if(sessionStorage.getItem('admin_auth')==='1'){window.location.href='dashboard.html';}
+</script>
+</body>
+</html>

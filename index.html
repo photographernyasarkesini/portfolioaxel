@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axel Ariel — Videografer & Fotografer Batam</title>
+  <meta name="description" content="Axel Ariel, freelance fotografer dan videografer profesional berbasis di Batam. Wedding cinematic, video korporat, fotografi, konten media sosial.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">Axel Ariel</a>
+      <span class="nav-logo-sub">Freelance Fotografer &amp; Videografer</span>
+      <span class="nav-badge"><span class="nav-badge-dot"></span> Menerima Project</span>
+    </div>
+    <div class="nav-center">
+      <a href="index.html" class="nav-link active">Beranda</a>
+      <a href="work.html" class="nav-link">Karya</a>
+      <a href="about.html" class="nav-link">Tentang</a>
+      <a href="contact.html" class="nav-link">Kontak</a>
+    </div>
+    <a href="contact.html" class="nav-btn-hire">Hire Me</a>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Beranda</a>
+  <a href="work.html">Karya</a>
+  <a href="about.html">Tentang</a>
+  <a href="services.html">Layanan</a>
+  <a href="contact.html">Kontak</a>
+</div>
+
+<!-- HERO -->
+<section class="hero-section" id="heroSection">
+  <div class="hero-gallery" id="heroGallery"></div>
+  <div class="hero-content" id="heroContent">
+    <p class="hero-label">Batam, Indonesia &nbsp;·&nbsp; Est. 2019</p>
+    <h1 class="hero-name">Axel<br>Ariel</h1>
+    <p class="hero-tagline">Freelance Fotografer &amp; Videografer</p>
+    <div class="hero-ctas">
+      <a href="work.html" class="btn btn-amber">Lihat Karya</a>
+      <a href="contact.html" class="btn btn-outline">Hubungi Saya</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <p class="marquee-label">Spesialisasi</p>
+  <div class="marquee-row">
+    <div class="marquee-inner">
+      <span class="marquee-item">WEDDING<span class="sep">·</span></span>
+      <span class="marquee-item">EVENT<span class="sep">·</span></span>
+      <span class="marquee-item">BRAND<span class="sep">·</span></span>
+      <span class="marquee-item">DOCUMENTARY<span class="sep">·</span></span>
+      <span class="marquee-item">PORTRAIT<span class="sep">·</span></span>
+      <span class="marquee-item">PREWEDDING<span class="sep">·</span></span>
+      <span class="marquee-item">WEDDING<span class="sep">·</span></span>
+      <span class="marquee-item">EVENT<span class="sep">·</span></span>
+      <span class="marquee-item">BRAND<span class="sep">·</span></span>
+      <span class="marquee-item">DOCUMENTARY<span class="sep">·</span></span>
+      <span class="marquee-item">PORTRAIT<span class="sep">·</span></span>
+      <span class="marquee-item">PREWEDDING<span class="sep">·</span></span>
+    </div>
+  </div>
+  <div class="marquee-row">
+    <div class="marquee-inner reverse">
+      <span class="marquee-item">47+ WEDDING FILMS<span class="sep">·</span></span>
+      <span class="marquee-item">500K+ VIRAL VIEWS<span class="sep">·</span></span>
+      <span class="marquee-item">5+ TAHUN<span class="sep">·</span></span>
+      <span class="marquee-item">8K+ FOLLOWERS<span class="sep">·</span></span>
+      <span class="marquee-item">47+ WEDDING FILMS<span class="sep">·</span></span>
+      <span class="marquee-item">500K+ VIRAL VIEWS<span class="sep">·</span></span>
+      <span class="marquee-item">5+ TAHUN<span class="sep">·</span></span>
+      <span class="marquee-item">8K+ FOLLOWERS<span class="sep">·</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- KARYA SECTION -->
+<section class="section" style="background:var(--bg-dark);padding:5rem 0;">
+  <div class="section-inner">
+    <div style="margin-bottom:2.5rem;">
+      <p class="section-label">Karya Pilihan</p>
+      <h2 class="section-title" style="color:#FDFAF6;">Cerita yang <em>Kami Ciptakan</em></h2>
+      <p class="section-sub" style="color:rgba(253,250,246,0.5);">Setiap frame adalah keputusan, setiap cut adalah emosi.</p>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+      <p class="cat-section-label" style="color:rgba(253,250,246,0.4);margin-bottom:0;">VIDEO</p>
+      <div style="display:flex;gap:0.5rem;">
+        <button id="vidPrev" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(253,250,246,0.15);background:transparent;color:rgba(253,250,246,0.6);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;">&#8592;</button>
+        <button id="vidNext" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(253,250,246,0.15);background:transparent;color:rgba(253,250,246,0.6);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;">&#8594;</button>
+      </div>
+    </div>
+    <div class="karya-grid-video" id="videoCarousel"></div>
+
+    <p class="cat-section-label" style="color:rgba(253,250,246,0.4);margin-top:2.5rem;margin-bottom:1rem;">FOTOGRAFI</p>
+    <div class="karya-grid-foto" id="fotoGrid">
+      <a href="foto-wedding.html" class="karya-card-foto" id="fotoWedding">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#C17A3C,#7B5E42);"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,8,5,0.6),transparent 50%);"></div>
+        <span class="karya-foto-pill">Wedding &rarr;</span>
+      </a>
+      <a href="foto-prewedding.html" class="karya-card-foto" id="fotoPrewedding">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#D4A574,#8B6B4A);"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,8,5,0.6),transparent 50%);"></div>
+        <span class="karya-foto-pill">Prewedding &rarr;</span>
+      </a>
+      <a href="foto-portrait.html" class="karya-card-foto" id="fotoPortrait">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#E8CFA0,#C8A870);"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,8,5,0.6),transparent 50%);"></div>
+        <span class="karya-foto-pill">Portrait &rarr;</span>
+      </a>
+      <a href="foto-analog.html" class="karya-card-foto" id="fotoAnalog">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#5C4535,#1E1510);"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,8,5,0.6),transparent 50%);"></div>
+        <span class="karya-foto-pill">Analog &rarr;</span>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:3rem;">
+      <a href="work.html" class="btn btn-outline">Lihat Semua Karya &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="section" style="background:#0A0603;">
+  <div class="section-inner">
+    <p class="section-label">Kata Klien</p>
+    <h2 class="section-title" style="color:#FDFAF6;">Mereka <em>Bercerita</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <span class="t-quote">"</span>
+        <p class="t-text">Axel benar-benar menangkap esensi hari pernikahan kami. Video yang dibuat membuat kami menangis setiap kali menontonnya.</p>
+        <div class="t-divider"></div>
+        <p class="t-author">Rizky &amp; Dira</p>
+        <p class="t-role">Wedding Client &middot; 2024</p>
+      </div>
+      <div class="testimonial-card">
+        <span class="t-quote">"</span>
+        <p class="t-text">Profesional, tepat waktu, dan hasil videonya melebihi ekspektasi kami. Bank Indonesia sangat puas dengan kualitas produksinya.</p>
+        <div class="t-divider"></div>
+        <p class="t-author">Tim Komunikasi BI</p>
+        <p class="t-role">Corporate Client &middot; 2024</p>
+      </div>
+      <div class="testimonial-card">
+        <span class="t-quote">"</span>
+        <p class="t-text">Aftermovie Innoverse yang dibuat Axel berhasil meraih divisi terfavorit. Kualitas sinematiknya luar biasa untuk event skala kampus.</p>
+        <div class="t-divider"></div>
+        <p class="t-author">Panitia Innoverse</p>
+        <p class="t-role">Event Client &middot; 2024</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section class="section" style="background:#0A0603;">
+  <div class="section-inner">
+    <p class="section-label">Layanan</p>
+    <h2 class="section-title" style="color:#FDFAF6;">Apa yang Saya <em>Tawarkan</em></h2>
+    <p class="section-sub" style="color:rgba(253,250,246,0.5);">Dari wedding cinematic hingga konten viral — semua dikerjakan dengan detail.</p>
+    <div class="services-grid">
+      <div class="service-card" style="background:#110A05;border-color:rgba(253,250,246,0.06);">
+        <span class="service-card-num">01</span>
+        <div class="service-icon-box"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.88v6.24a1 1 0 01-1.447.888L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
+        <h3 class="service-title" style="color:#FDFAF6;">Videografi Wedding</h3>
+        <ul class="service-list"><li style="color:rgba(253,250,246,0.55);">Film highlight 3–5 menit</li><li style="color:rgba(253,250,246,0.55);">Same Day Edit (SDE)</li><li style="color:rgba(253,250,246,0.55);">Drone aerial shot</li></ul>
+        <a href="services.html" class="service-link">Selengkapnya &rarr;</a>
+      </div>
+      <div class="service-card" style="background:#110A05;border-color:rgba(253,250,246,0.06);">
+        <span class="service-card-num">02</span>
+        <div class="service-icon-box"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3 class="service-title" style="color:#FDFAF6;">Video Korporat &amp; Brand</h3>
+        <ul class="service-list"><li style="color:rgba(253,250,246,0.55);">Company profile</li><li style="color:rgba(253,250,246,0.55);">Produk &amp; iklan</li><li style="color:rgba(253,250,246,0.55);">Motion graphic</li></ul>
+        <a href="services.html" class="service-link">Selengkapnya &rarr;</a>
+      </div>
+      <div class="service-card" style="background:#110A05;border-color:rgba(253,250,246,0.06);">
+        <span class="service-card-num">03</span>
+        <div class="service-icon-box"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <h3 class="service-title" style="color:#FDFAF6;">Fotografi</h3>
+        <ul class="service-list"><li style="color:rgba(253,250,246,0.55);">Wedding &amp; prewedding</li><li style="color:rgba(253,250,246,0.55);">Portrait &amp; graduation</li><li style="color:rgba(253,250,246,0.55);">Lightroom retouching</li></ul>
+        <a href="services.html" class="service-link">Selengkapnya &rarr;</a>
+      </div>
+      <div class="service-card" style="background:#110A05;border-color:rgba(253,250,246,0.06);">
+        <span class="service-card-num">04</span>
+        <div class="service-icon-box"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+        <h3 class="service-title" style="color:#FDFAF6;">Konten Media Sosial</h3>
+        <ul class="service-list"><li style="color:rgba(253,250,246,0.55);">TikTok / Reels / Shorts</li><li style="color:rgba(253,250,246,0.55);">Hook-driven editing</li><li style="color:rgba(253,250,246,0.55);">Strategi konten bulanan</li></ul>
+        <a href="services.html" class="service-link">Selengkapnya &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" style="background:var(--bg);">
+  <div class="section-inner">
+    <p class="section-label">Alur Kerja</p>
+    <h2 class="section-title">Proses yang <em>Sederhana</em></h2>
+    <p class="section-sub">Dari brief hingga delivery — transparan dan terstruktur.</p>
+    <div class="process-row">
+      <div class="process-step">
+        <div class="process-circle"><span class="process-num">1</span></div>
+        <h4 class="process-title">Brief &amp; Konsultasi</h4>
+        <p class="process-desc">Diskusi kebutuhan, lokasi, tanggal, dan ekspektasi project.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-circle"><span class="process-num">2</span></div>
+        <h4 class="process-title">Produksi</h4>
+        <p class="process-desc">Pengambilan gambar dengan Sony A7SII dan gimbal.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-circle"><span class="process-num">3</span></div>
+        <h4 class="process-title">Post-Production</h4>
+        <p class="process-desc">Editing, color grading di DaVinci Resolve atau Premiere Pro.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-circle"><span class="process-num">4</span></div>
+        <h4 class="process-title">Delivery</h4>
+        <p class="process-desc">File dikirim via Google Drive dalam format MP4 1080p/4K.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <h2 class="cta-title">Siap Mengabadikan <em>Momenmu?</em></h2>
+  <p class="cta-sub">Chat langsung via WhatsApp atau isi form kontak. Senin–Sabtu, 09.00–21.00 WIB.</p>
+  <div class="cta-actions">
+    <a href="https://wa.me/6285542200957?text=Halo%20Axel%2C%20saya%20ingin%20tanya%20tentang%20layananmu" target="_blank" class="btn btn-amber">WhatsApp Sekarang</a>
+    <a href="contact.html" class="btn btn-outline">Lihat Layanan</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-cta-box">
+    <div class="footer-cta-inner">
+      <p class="footer-cta-text">Punya project? <em>Ayo mulai.</em></p>
+      <a href="contact.html" class="btn btn-amber">Hubungi Sekarang</a>
+    </div>
+  </div>
+  <div class="footer-cols">
+    <div>
+      <a href="index.html" class="footer-logo">Axel Ariel</a>
+      <p class="footer-tagline">Freelance Fotografer &amp; Videografer</p>
+      <p class="footer-bio">Videografer dan fotografer berbasis di Batam. Mengabadikan momen terbaik dengan sentuhan sinematik yang bercerita.</p>
+      <div class="footer-watermark">AA</div>
+    </div>
+    <div>
+      <p class="footer-col-title">Navigasi</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="work.html">Karya</a></li>
+        <li><a href="about.html">Tentang</a></li>
+        <li><a href="services.html">Layanan</a></li>
+        <li><a href="contact.html">Kontak</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Layanan</p>
+      <ul class="footer-links">
+        <li><a href="video-wedding.html">Videografi Wedding</a></li>
+        <li><a href="video-corporate.html">Video Korporat</a></li>
+        <li><a href="foto-wedding.html">Fotografi Wedding</a></li>
+        <li><a href="foto-portrait.html">Portrait</a></li>
+        <li><a href="services.html">Selengkapnya</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Kontak</p>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/6285542200957" target="_blank">+62 855-4220-0957</a></li>
+        <li><a href="mailto:axelarielmuhammad@gmail.com">axelarielmuhammad@gmail.com</a></li>
+        <li><a href="https://instagram.com/shotbyaxell" target="_blank">@shotbyaxell</a></li>
+        <li><a href="#">Batam, Indonesia</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 Axel Ariel. All rights reserved.</span>
+    <span>Batam, Indonesia</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/6285542200957?text=Halo%20Axel%2C%20saya%20ingin%20tanya%20tentang%20layananmu" target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.527 5.845L.057 23.272a.75.75 0 00.916.948l5.598-1.469A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.661-.513-5.185-1.407l-.371-.22-3.847 1.01.976-3.734-.242-.384A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  WhatsApp
+</a>
+
+<script src="main.js"></script>
+<script>
+/* ── VIDEO CAROUSEL ── */
+(function(){
+  const carousel = document.getElementById('videoCarousel');
+  const prevBtn  = document.getElementById('vidPrev');
+  const nextBtn  = document.getElementById('vidNext');
+  if(!carousel) return;
+
+  const CAT_LABELS = {wedding:'Wedding',prewedding:'Prewedding',corporate:'Corporate',event:'Event',documentary:'Documentary',socialmedia:'Social Media'};
+  let videos = [], idx = 0, timer = null, dir = 1;
+
+  function card(v, i){
+    const animClass = dir >= 0 ? 'vid-anim-right' : 'vid-anim-left';
+    const delay = i * 0.07;
+    return `<a class="karya-card ${animClass}" style="animation-delay:${delay}s" href="https://youtu.be/${v.youtube_id}" target="_blank" rel="noopener">
+      <div class="karya-card-img" style="background:url(https://img.youtube.com/vi/${v.youtube_id}/hqdefault.jpg) center/cover;"></div>
+      <div class="karya-card-ov"></div>
+      <div class="karya-card-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="karya-card-info">
+        <span class="karya-card-tag">${CAT_LABELS[v.category]||v.category} &middot; ${v.year}</span>
+        <div class="karya-card-title">${v.title}</div>
+      </div>
+    </a>`;
+  }
+
+  function render(){
+    const a = videos[idx];
+    const b = videos[(idx+1) % videos.length];
+    const c = videos[(idx+2) % videos.length];
+    carousel.innerHTML = card(a,0) + card(b,1) + card(c,2);
+  }
+
+  function advance(){
+    dir = 1;
+    idx = (idx + 1) % videos.length;
+    render();
+  }
+
+  function startTimer(){
+    clearInterval(timer);
+    timer = setInterval(advance, 3500);
+  }
+
+  fetch('data.json').then(r=>r.json()).then(data=>{
+    videos = data.videos.filter(v=>v.youtube_id && v.youtube_id !== 'YOUTUBE_ID_DI_SINI');
+    if(!videos.length) return;
+    render();
+    startTimer();
+
+    nextBtn.onclick = ()=>{ dir=1; idx=(idx+1)%videos.length; render(); startTimer(); };
+    prevBtn.onclick = ()=>{ dir=-1; idx=(idx-1+videos.length)%videos.length; render(); startTimer(); };
+
+    carousel.addEventListener('mouseenter', ()=> clearInterval(timer));
+    carousel.addEventListener('mouseleave', startTimer);
+  });
+})();
+</script>
+<script>
+/* ── FOTO CATEGORY SLIDESHOW ── */
+(function(){
+  const cats = [
+    {id:'fotoWedding',    cat:'wedding'},
+    {id:'fotoPrewedding', cat:'prewedding'},
+    {id:'fotoPortrait',   cat:'portrait'},
+    {id:'fotoAnalog',     cat:'analog'},
+  ];
+  fetch('data.json').then(r=>r.json()).then(data=>{
+    cats.forEach(function(c){
+      const el = document.getElementById(c.id);
+      if(!el) return;
+
+      // Kumpulkan cover tiap album dalam kategori
+      const albums = data.albums.filter(a => a.category === c.cat);
+      let slides = albums.filter(a => a.cover).map(a => a.cover);
+
+      // Kalau cover < 2 (hanya 1 album), ambil foto-foto dari dalam album itu
+      if(slides.length < 2 && albums.length > 0) {
+        const photos = albums[0].photos || [];
+        // Ambil max 8 foto tersebar merata
+        const step = Math.max(1, Math.floor(photos.length / 8));
+        slides = [];
+        for(let i = 0; i < photos.length; i += step) slides.push(photos[i]);
+        if(slides.length > 8) slides = slides.slice(0, 8);
+      }
+
+      if(!slides.length) return;
+      const bg = el.querySelector('div:first-child');
+      if(!bg) return;
+      bg.style.cssText += ';transition:opacity 0.7s ease;';
+      bg.style.background = 'url('+slides[0]+') center/cover';
+      if(slides.length < 2) return;
+
+      let idx = 0;
+      setInterval(function(){
+        bg.style.opacity = '0';
+        setTimeout(function(){
+          idx = (idx + 1) % slides.length;
+          bg.style.background = 'url('+slides[idx]+') center/cover';
+          bg.style.opacity = '1';
+        }, 700);
+      }, 2800);
+    });
+  });
+})();
+</script>
+<script>
+/* ── HERO 3D AUTO-PLAY GALLERY ── */
+(function(){
+  var gallery = document.getElementById('heroGallery');
+  var content = document.getElementById('heroContent');
+  if(!gallery) return;
+
+  var isMobile = window.innerWidth < 640;
+
+  var cardData = isMobile ? [
+    /* Mobile: 6 kartu — 3 atas, 3 bawah, tersebar rapi */
+    { row:0, x:'-6%',  y:'8%',  w:138, h:100, bg:'url(assets/images/hero/NaqibNisa-183.webp) center/cover',         rz:-10, ry:-6 },
+    { row:0, x:'31%',  y:'5%',  w:128, h:93,  bg:'url(assets/images/hero/Ka-Ivory08313.webp) center/cover',          rz:  3, ry:-4 },
+    { row:0, x:'68%',  y:'9%',  w:138, h:100, bg:'url(assets/images/hero/NaqibNisa-190.webp) center/cover',          rz:  9, ry: 6 },
+    { row:1, x:'-8%',  y:'67%', w:138, h:100, bg:'url(assets/images/hero/Edited-33.webp) center/cover',              rz:  8, ry:-6 },
+    { row:1, x:'30%',  y:'71%', w:128, h:93,  bg:'url(assets/images/hero/Studio-Nadem08549.webp) center/cover',      rz: -4, ry: 4 },
+    { row:1, x:'68%',  y:'66%', w:138, h:100, bg:'url(assets/images/hero/Capture-One-Catalog0741.webp) center/cover',rz: -9, ry: 7 },
+  ] : [
+    /* Desktop: 16 kartu */
+    { row:0, x:'4%',  y:'14%', w:190, h:130, bg:'url(assets/images/hero/NaqibNisa-183.webp) center/cover', rz:-7,  ry:-8  },
+    { row:0, x:'16%', y:'10%', w:160, h:115, bg:'url(assets/images/hero/Edited-26.webp) center/cover', rz:-3,  ry:-5  },
+    { row:0, x:'29%', y:'16%', w:175, h:125, bg:'url(assets/images/hero/Ka-Ivory08313.webp) center/cover', rz: 4,  ry:-9  },
+    { row:0, x:'43%', y:'11%', w:165, h:120, bg:'url(assets/images/hero/DSC04796.webp) center/cover', rz:-5,  ry: 6  },
+    { row:0, x:'56%', y:'15%', w:180, h:130, bg:'url(assets/images/hero/Studio-Nadem00260-Edit.webp) center/cover', rz: 6,  ry:-4  },
+    { row:0, x:'68%', y:'9%',  w:155, h:112, bg:'url(assets/images/hero/NaqibNisa-190.webp) center/cover', rz:-4,  ry: 8  },
+    { row:0, x:'80%', y:'14%', w:170, h:120, bg:'url(assets/images/hero/Capture-One-Catalog0643.webp) center/cover', rz: 7,  ry:-6  },
+    { row:0, x:'91%', y:'11%', w:160, h:115, bg:'url(assets/images/hero/JUN05078.webp) center/cover', rz:-6,  ry: 4  },
+    { row:1, x:'3%',  y:'65%', w:165, h:118, bg:'url(assets/images/hero/Edited-33.webp) center/cover', rz: 5,  ry:-7  },
+    { row:1, x:'15%', y:'68%', w:180, h:128, bg:'url(assets/images/hero/DSC01207.webp) center/cover', rz:-4,  ry: 6  },
+    { row:1, x:'28%', y:'63%', w:160, h:115, bg:'url(assets/images/hero/Ka-Ivory08319.webp) center/cover', rz: 3,  ry:-5  },
+    { row:1, x:'41%', y:'69%', w:175, h:125, bg:'url(assets/images/hero/Edited-3.webp) center/cover', rz:-6,  ry: 7  },
+    { row:1, x:'54%', y:'64%', w:168, h:120, bg:'url(assets/images/hero/Studio-Nadem08549.webp) center/cover', rz: 5,  ry:-6  },
+    { row:1, x:'67%', y:'67%', w:155, h:112, bg:'url(assets/images/hero/NaqibNisa-197.webp) center/cover', rz:-3,  ry: 5  },
+    { row:1, x:'80%', y:'63%', w:178, h:128, bg:'url(assets/images/hero/Capture-One-Catalog0741.webp) center/cover', rz: 7,  ry:-8  },
+    { row:1, x:'91%', y:'67%', w:162, h:116, bg:'url(assets/images/hero/DSC04894.webp) center/cover', rz:-5,  ry: 6  },
+  ];
+
+  var els = [];
+  cardData.forEach(function(c){
+    var d = document.createElement('div');
+    d.className = 'hero-gallery-card';
+    d.style.left = c.x; d.style.top = c.y;
+    d.style.width = c.w+'px'; d.style.height = c.h+'px';
+    d.style.background = c.bg; d.style.opacity = '0';
+    d._row = c.row; d._rz = c.rz; d._ry = c.ry;
+    gallery.appendChild(d);
+    els.push(d);
+  });
+
+  if(content){ content.style.opacity='0'; content.style.transform='translateY(40px)'; content.style.transition='none'; }
+
+  function clamp(v,a,b){ return Math.min(Math.max(v,a),b); }
+  function easeOut3(t){ return 1-Math.pow(1-t,3); }
+  function easeOut2(t){ return 1-Math.pow(1-t,2); }
+
+  /* Timeline (ms):
+     0–200   : delay
+     200–2000: cards fly in   (1800ms)
+     1400–3000: text fades in (1600ms) */
+  var CARDS_START = 200, CARDS_DUR = 1800;
+  var TEXT_START  = 1400, TEXT_DUR  = 1600;
+  var startTime = null;
+
+  function frame(ts){
+    if(!startTime) startTime = ts;
+    var t = ts - startTime;
+
+    var pCards = clamp((t - CARDS_START) / CARDS_DUR, 0, 1);
+    var pText  = clamp((t - TEXT_START)  / TEXT_DUR,  0, 1);
+    var eCards = easeOut3(pCards);
+    var eText  = easeOut2(pText);
+
+    els.forEach(function(el){
+      var fromVW = el._row === 0 ? -220 : 220;
+      var tx     = (1 - eCards) * fromVW;
+      var fromRY = el._row === 0 ? -75 : 75;
+      var ry     = fromRY + (el._ry - fromRY) * eCards;
+      var rz     = (el._rz * 3) + (el._rz - el._rz * 3) * eCards;
+      var scale  = 0.6 + 0.4 * eCards;
+      el.style.opacity   = eCards * 0.72;
+      el.style.transform = 'translateX(calc('+tx+' * 1vw)) rotateY('+ry+'deg) rotateZ('+rz+'deg) scale('+scale+')';
+    });
+
+    if(content){
+      content.style.opacity   = eText;
+      content.style.transform = 'translateY('+(40 - 40*eText)+'px)';
+    }
+
+    if(pCards < 1 || pText < 1) requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

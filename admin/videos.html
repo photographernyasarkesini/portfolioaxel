@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Video — Admin Axel Ariel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#F4EFE6;--bg-alt:#EDE5D8;--bg-dark:#0D0805;--surface:#FDFAF6;
+      --text:#1C1612;--text-muted:#8C7B6B;--accent:#C17A3C;
+      --sidebar:#1C1612;--sidebar-w:240px;
+      --font-display:'DM Serif Display',serif;
+      --font-body:'Inter',sans-serif;
+      --font-mono:'Space Mono',monospace;
+    }
+    html,body{height:100%;font-family:var(--font-body);background:var(--bg);color:var(--text);}
+    body{display:flex;}
+
+    /* SIDEBAR */
+    .admin-sidebar{width:var(--sidebar-w);background:var(--sidebar);display:flex;flex-direction:column;min-height:100vh;position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto;}
+    .sidebar-header{padding:1.75rem 1.5rem 1.25rem;}
+    .sidebar-logo{font-family:var(--font-display);font-size:1.3rem;color:#FDFAF6;text-decoration:none;display:block;}
+    .sidebar-sublabel{font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(253,250,246,0.35);margin-top:0.25rem;}
+    .sidebar-badge{display:inline-flex;align-items:center;gap:5px;margin-top:0.75rem;padding:3px 8px;border-radius:20px;background:rgba(74,222,128,0.12);font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:#4ade80;}
+    .sidebar-badge-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;}
+    .sidebar-divider{height:1px;background:rgba(255,255,255,0.07);margin:0.75rem 0;}
+    .sidebar-nav{flex:1;padding:0.5rem 0;}
+    .sidebar-nav-label{font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(253,250,246,0.25);padding:0.5rem 1.5rem 0.35rem;}
+    .sidebar-link{display:flex;align-items:center;gap:0.75rem;padding:0.65rem 1.5rem;text-decoration:none;font-size:13px;color:rgba(253,250,246,0.55);transition:all 0.15s;}
+    .sidebar-link:hover{color:#FDFAF6;background:rgba(255,255,255,0.05);}
+    .sidebar-link.active{color:#FDFAF6;background:rgba(193,122,60,0.15);border-right:2px solid var(--accent);}
+    .sidebar-link svg{flex-shrink:0;opacity:0.6;}
+    .sidebar-link.active svg{opacity:1;}
+    .sidebar-footer{padding:1.25rem 1.5rem;border-top:1px solid rgba(255,255,255,0.07);}
+    .sidebar-site-link{display:block;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(253,250,246,0.3);text-decoration:none;margin-bottom:0.75rem;transition:color 0.15s;}
+    .sidebar-site-link:hover{color:var(--accent);}
+    .btn-logout{width:100%;padding:0.5rem 0.75rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:5px;cursor:pointer;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(253,250,246,0.4);transition:all 0.15s;}
+    .btn-logout:hover{background:rgba(193,122,60,0.15);color:var(--accent);border-color:rgba(193,122,60,0.3);}
+
+    /* MAIN */
+    .admin-main{margin-left:var(--sidebar-w);flex:1;padding:2.5rem;min-height:100vh;}
+    .admin-page-header{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;}
+    .admin-page-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem;}
+    .admin-page-title{font-family:var(--font-display);font-size:2rem;color:var(--text);}
+    .btn-toggle-form{padding:0.6rem 1.25rem;background:var(--accent);color:#1A0F08;border:none;border-radius:6px;cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;transition:opacity 0.2s;}
+    .btn-toggle-form:hover{opacity:0.85;}
+
+    /* FORM CARD */
+    .admin-card{background:var(--surface);border:1px solid rgba(28,22,18,0.08);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;}
+    .admin-card-title{font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(28,22,18,0.07);}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .form-group{margin-bottom:0;}
+    .form-group.full{grid-column:1/-1;}
+    .form-label{display:block;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem;}
+    .form-input,.form-select,.form-textarea{width:100%;padding:0.65rem 0.875rem;border:1px solid rgba(28,22,18,0.15);border-radius:6px;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:13px;outline:none;transition:border-color 0.2s;}
+    .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);}
+    .form-textarea{min-height:80px;resize:vertical;}
+    .form-output{width:100%;min-height:100px;padding:0.75rem;border:1px solid rgba(28,22,18,0.1);border-radius:6px;background:rgba(28,22,18,0.03);font-family:var(--font-mono);font-size:11px;color:var(--text-muted);resize:vertical;}
+    .yt-preview{width:100%;aspect-ratio:16/9;background:rgba(28,22,18,0.06);border-radius:6px;margin-top:0.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px dashed rgba(28,22,18,0.12);}
+    .yt-preview iframe{width:100%;height:100%;border:none;}
+    .yt-preview-placeholder{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:0.05em;}
+    .checkbox-row{display:flex;align-items:center;gap:0.5rem;margin-top:0.25rem;}
+    .checkbox-row input{width:14px;height:14px;accent-color:var(--accent);}
+    .checkbox-row label{font-size:13px;color:var(--text);}
+    .form-actions{display:flex;gap:0.75rem;margin-top:1.25rem;}
+    .btn-save{padding:0.6rem 1.5rem;background:var(--bg-dark);color:#FDFAF6;border:none;border-radius:6px;cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s;}
+    .btn-save:hover{background:var(--accent);color:#1A0F08;}
+    .btn-reset{padding:0.6rem 1.25rem;background:transparent;color:var(--text-muted);border:1px solid rgba(28,22,18,0.15);border-radius:6px;cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;}
+    .btn-reset:hover{border-color:var(--text-muted);color:var(--text);}
+
+    /* SEARCH */
+    .search-row{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+    .search-input{flex:1;padding:0.65rem 0.875rem;border:1px solid rgba(28,22,18,0.12);border-radius:6px;background:var(--surface);font-family:var(--font-body);font-size:13px;color:var(--text);outline:none;transition:border-color 0.2s;}
+    .search-input:focus{border-color:var(--accent);}
+
+    /* TABLE */
+    .table-wrap{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;font-size:13px;}
+    thead tr{border-bottom:2px solid rgba(28,22,18,0.1);}
+    th{padding:0.65rem 0.75rem;text-align:left;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap;}
+    tbody tr{border-bottom:1px solid rgba(28,22,18,0.05);transition:background 0.1s;}
+    tbody tr:hover{background:rgba(193,122,60,0.04);}
+    td{padding:0.65rem 0.75rem;color:var(--text);}
+    .td-title{max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .cat-pill{display:inline-block;padding:2px 7px;border-radius:3px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.05em;text-transform:uppercase;background:rgba(28,22,18,0.07);color:var(--text-muted);}
+    .featured-pill{display:inline-block;padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:8px;background:rgba(193,122,60,0.12);color:var(--accent);text-transform:uppercase;letter-spacing:0.06em;}
+    .table-actions{display:flex;gap:0.4rem;}
+    .btn-edit,.btn-del{padding:3px 10px;border:none;border-radius:4px;cursor:pointer;font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;}
+    .btn-edit{background:rgba(28,22,18,0.08);color:var(--text);transition:background 0.15s;}
+    .btn-edit:hover{background:rgba(28,22,18,0.15);}
+    .btn-del{background:rgba(220,38,38,0.08);color:#dc2626;transition:background 0.15s;}
+    .btn-del:hover{background:rgba(220,38,38,0.15);}
+
+    .form-section{display:none;}
+    .form-section.open{display:block;}
+
+    @media(max-width:768px){.admin-main{margin-left:0;padding:1.5rem;}.form-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="admin-sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html" class="sidebar-logo">Axel Ariel</a>
+    <div class="sidebar-sublabel">Admin Panel</div>
+    <div class="sidebar-badge"><span class="sidebar-badge-dot"></span> Online</div>
+  </div>
+  <div class="sidebar-divider"></div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-label">Menu</div>
+    <a href="dashboard.html" class="sidebar-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="videos.html" class="sidebar-link active">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.88v6.24a1 1 0 01-1.447.888L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+      Kelola Video
+    </a>
+    <a href="albums.html" class="sidebar-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      Kelola Album
+    </a>
+    <a href="settings.html" class="sidebar-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Pengaturan
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="../index.html" class="sidebar-site-link" target="_blank">&#8599; Lihat Website</a>
+    <button class="btn-logout" onclick="logout()">Keluar</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="admin-main">
+  <div class="admin-page-header">
+    <div>
+      <p class="admin-page-label">Admin Panel</p>
+      <h1 class="admin-page-title">Kelola Video</h1>
+    </div>
+    <button class="btn-toggle-form" onclick="toggleForm()">+ Tambah Video</button>
+  </div>
+
+  <!-- FORM -->
+  <div class="admin-card form-section" id="videoForm">
+    <div class="admin-card-title" id="formTitle">Tambah Video Baru</div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label" for="vJudul">Judul Video</label>
+        <input class="form-input" type="text" id="vJudul" placeholder="Judul video">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="vKategori">Kategori</label>
+        <select class="form-select" id="vKategori">
+          <option value="">Pilih kategori</option>
+          <option value="wedding">Wedding</option>
+          <option value="prewedding">Prewedding</option>
+          <option value="corporate">Corporate</option>
+          <option value="event">Event</option>
+          <option value="documentary">Documentary</option>
+          <option value="socialmedia">Social Media</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="vYtId">YouTube ID</label>
+        <input class="form-input" type="text" id="vYtId" placeholder="Contoh: dQw4w9WgXcQ" oninput="previewYT()">
+        <div class="yt-preview" id="ytPreview"><span class="yt-preview-placeholder">Preview YouTube</span></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="vTahun">Tahun</label>
+        <input class="form-input" type="text" id="vTahun" placeholder="2025">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="vLokasi">Lokasi</label>
+        <input class="form-input" type="text" id="vLokasi" placeholder="Batam, Indonesia">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="vDurasi">Durasi</label>
+        <input class="form-input" type="text" id="vDurasi" placeholder="4:32">
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="vTools">Tools (pisahkan koma)</label>
+        <input class="form-input" type="text" id="vTools" placeholder="Sony A7SII, DJI Ronin, Premiere Pro">
+      </div>
+      <div class="form-group full">
+        <div class="checkbox-row">
+          <input type="checkbox" id="vFeatured">
+          <label for="vFeatured">Tampilkan sebagai Featured</label>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="vDeskripsi">Deskripsi</label>
+        <textarea class="form-textarea" id="vDeskripsi" placeholder="Ceritakan tentang video ini..."></textarea>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Output JSON</label>
+        <textarea class="form-output" id="vJsonOut" readonly placeholder="JSON akan muncul di sini..."></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-save" onclick="generateVideoJson()">Simpan &amp; Generate JSON</button>
+      <button class="btn-reset" onclick="resetVideoForm()">Reset</button>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="admin-card">
+    <div class="admin-card-title">Daftar Video</div>
+    <div class="search-row">
+      <input class="search-input" type="text" id="searchInput" placeholder="Cari judul video..." oninput="filterTable()">
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Judul</th>
+            <th>Kategori</th>
+            <th>Tahun</th>
+            <th>Durasi</th>
+            <th>Featured</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="videoTable">
+          <tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:2rem;font-size:13px;">Memuat...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+if(sessionStorage.getItem('admin_auth')!=='1'){window.location.href='index.html';}
+function logout(){sessionStorage.removeItem('admin_auth');window.location.href='index.html';}
+
+var allVideos=[];
+var editId=null;
+
+function toggleForm(){
+  var f=document.getElementById('videoForm');
+  f.classList.toggle('open');
+  if(!f.classList.contains('open')){resetVideoForm();}
+}
+
+function previewYT(){
+  var id=document.getElementById('vYtId').value.trim();
+  var p=document.getElementById('ytPreview');
+  if(id){
+    p.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'" allowfullscreen></iframe>';
+  } else {
+    p.innerHTML='<span class="yt-preview-placeholder">Preview YouTube</span>';
+  }
+}
+
+function generateVideoJson(){
+  var obj={
+    id:'video-'+Date.now(),
+    title:document.getElementById('vJudul').value||'',
+    category:document.getElementById('vKategori').value||'',
+    youtube_id:document.getElementById('vYtId').value||'',
+    year:document.getElementById('vTahun').value||'',
+    location:document.getElementById('vLokasi').value||'',
+    duration:document.getElementById('vDurasi').value||'',
+    tools:document.getElementById('vTools').value.split(',').map(s=>s.trim()).filter(Boolean),
+    featured:document.getElementById('vFeatured').checked,
+    description:document.getElementById('vDeskripsi').value||''
+  };
+  document.getElementById('vJsonOut').value=JSON.stringify(obj,null,2);
+}
+
+function resetVideoForm(){
+  ['vJudul','vYtId','vTahun','vLokasi','vDurasi','vTools','vDeskripsi','vJsonOut'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('vKategori').value='';
+  document.getElementById('vFeatured').checked=false;
+  document.getElementById('ytPreview').innerHTML='<span class="yt-preview-placeholder">Preview YouTube</span>';
+  document.getElementById('formTitle').textContent='Tambah Video Baru';
+  editId=null;
+}
+
+function filterTable(){
+  var q=document.getElementById('searchInput').value.toLowerCase();
+  var rows=document.querySelectorAll('#videoTable tr[data-id]');
+  rows.forEach(function(r){
+    var title=r.querySelector('.td-title').textContent.toLowerCase();
+    r.style.display=title.includes(q)?'':'none';
+  });
+}
+
+function editVideo(id){
+  var v=allVideos.find(function(x){return x.id===id;});
+  if(!v)return;
+  document.getElementById('vJudul').value=v.title||'';
+  document.getElementById('vKategori').value=v.category||'';
+  document.getElementById('vYtId').value=v.youtube_id||'';
+  document.getElementById('vTahun').value=v.year||'';
+  document.getElementById('vLokasi').value=v.location||'';
+  document.getElementById('vDurasi').value=v.duration||'';
+  document.getElementById('vTools').value=(v.tools||[]).join(', ');
+  document.getElementById('vFeatured').checked=!!v.featured;
+  document.getElementById('vDeskripsi').value=v.description||'';
+  document.getElementById('formTitle').textContent='Edit Video: '+v.title;
+  editId=id;
+  previewYT();
+  var f=document.getElementById('videoForm');
+  f.classList.add('open');
+  f.scrollIntoView({behavior:'smooth'});
+}
+
+function deleteVideo(id){
+  if(!confirm('Hapus video "'+id+'"? Tindakan ini tidak bisa dibatalkan.'))return;
+  fetch('/api/delete',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({type:'video',id:id})
+  }).then(function(r){return r.json();}).then(function(res){
+    if(res.ok){
+      allVideos=allVideos.filter(function(v){return v.id!==id;});
+      document.querySelector('#videoTable tr[data-id="'+id+'"]').remove();
+    } else {
+      alert('Gagal hapus: '+(res.error||'error'));
+    }
+  }).catch(function(e){alert('Gagal: '+e.message);});
+}
+
+fetch('../data.json').then(function(r){return r.json();}).then(function(data){
+  allVideos=data.videos||[];
+  var tbody=document.getElementById('videoTable');
+  if(!allVideos.length){
+    tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:2rem;font-size:13px;">Belum ada video.</td></tr>';
+    return;
+  }
+  tbody.innerHTML=allVideos.map(function(v,i){
+    return '<tr data-id="'+v.id+'">'
+      +'<td style="color:var(--text-muted);">'+(i+1)+'</td>'
+      +'<td class="td-title">'+v.title+'</td>'
+      +'<td><span class="cat-pill">'+v.category+'</span></td>'
+      +'<td>'+v.year+'</td>'
+      +'<td style="font-family:var(--font-mono);font-size:11px;">'+v.duration+'</td>'
+      +'<td>'+(v.featured?'<span class="featured-pill">Yes</span>':'<span style="color:var(--text-muted);font-size:12px;">—</span>')+'</td>'
+      +'<td><div class="table-actions">'
+      +'<button class="btn-edit" onclick="editVideo(\''+v.id+'\')">Edit</button>'
+      +'<button class="btn-del" onclick="deleteVideo(\''+v.id+'\')">Hapus</button>'
+      +'</div></td>'
+      +'</tr>';
+  }).join('');
+}).catch(function(){
+  document.getElementById('videoTable').innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:2rem;font-size:13px;">Gagal memuat data.</td></tr>';
+});
+</script>
+</body>
+</html>

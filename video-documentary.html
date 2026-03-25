@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Documentary — Axel Ariel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-transition"></div>
+<nav class="navbar solid">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">Axel Ariel</a>
+      <span class="nav-logo-sub">Freelance Fotografer &amp; Videografer</span>
+    </div>
+    <div class="nav-center">
+      <a href="index.html" class="nav-link">Beranda</a>
+      <a href="work.html" class="nav-link active">Karya</a>
+      <a href="about.html" class="nav-link">Tentang</a>
+      <a href="contact.html" class="nav-link">Kontak</a>
+    </div>
+    <a href="contact.html" class="nav-btn-hire">Hire Me</a>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Beranda</a><a href="work.html">Karya</a><a href="about.html">Tentang</a><a href="contact.html">Kontak</a>
+</div>
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="work.html">Karya</a><span>/</span><a href="work.html">Video</a><span>/</span><span>Documentary</span>
+  </div>
+</div>
+<div class="category-page-header">
+  <div class="section-inner">
+    <p class="section-label">Video</p>
+    <h1 class="category-page-title">Documentary <em style="font-style:italic;color:var(--accent);">Film</em></h1>
+    <p class="category-page-count" id="videoCount">Memuat...</p>
+  </div>
+</div>
+<section class="section" style="background:var(--bg);">
+  <div class="section-inner">
+    <div class="seg-wrap">
+      <button class="seg-btn" onclick="location.href='video-wedding.html'">Wedding</button>
+      <button class="seg-btn" onclick="location.href='video-prewedding.html'">Prewedding</button>
+      <button class="seg-btn" onclick="location.href='video-corporate.html'">Corporate</button>
+      <button class="seg-btn" onclick="location.href='video-event.html'">Event</button>
+      <button class="seg-btn active">Documentary</button>
+      <button class="seg-btn" onclick="location.href='video-socialmedia.html'">Social Media</button>
+      <button class="seg-btn" onclick="location.href='video-product.html'">Product</button>
+    </div>
+    <div class="video-grid" id="videoGrid"><p class="loading-text">Memuat video...</p></div>
+  </div>
+</section>
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <h2 class="cta-title">Ada Cerita yang Ingin <em>Diceritakan?</em></h2>
+  <p class="cta-sub">Documentary visual storytelling dari Batam.</p>
+  <div class="cta-actions">
+    <a href="https://wa.me/6285542200957" target="_blank" class="btn btn-amber">WhatsApp Sekarang</a>
+    <a href="contact.html" class="btn btn-outline">Form Kontak</a>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding:1.25rem 2rem;">
+    <span>&copy; 2025 Axel Ariel.</span><span>Batam, Indonesia</span>
+  </div>
+</footer>
+<a href="https://wa.me/6285542200957" target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.527 5.845L.057 23.272a.75.75 0 00.916.948l5.598-1.469A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.661-.513-5.185-1.407l-.371-.22-3.847 1.01.976-3.734-.242-.384A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  WhatsApp
+</a>
+<script src="main.js"></script>
+<script>
+const KATEGORI='documentary';
+const GRADIENTS={wedding:'linear-gradient(135deg,#C17A3C,#8B5E3C)',prewedding:'linear-gradient(135deg,#D4A574,#B8926A)',corporate:'linear-gradient(135deg,#5C4B3A,#3D3025)',event:'linear-gradient(135deg,#8B6B4A,#6B4E35)',documentary:'linear-gradient(135deg,#7B5E42,#5A4330)',socialmedia:'linear-gradient(135deg,#E8CFA0,#C8A870)'};
+fetch('data.json').then(r=>r.json()).then(data=>{
+  const videos=data.videos.filter(v=>v.category===KATEGORI);
+  document.getElementById('videoCount').textContent=videos.length+' video ditemukan';
+  const grid=document.getElementById('videoGrid');
+  if(!videos.length){grid.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎬</div><h3 class="empty-state-title">Belum ada video</h3><p class="empty-state-sub">Segera hadir.</p></div>';return;}
+  grid.innerHTML=videos.map(v=>`<a class="video-card" href="https://youtu.be/${v.youtube_id}" target="_blank" rel="noopener"><div class="video-card-thumb"><div style="position:absolute;inset:0;background:${v.youtube_id?'url(https://img.youtube.com/vi/'+v.youtube_id+'/mqdefault.jpg) center/cover':GRADIENTS[v.category]||'linear-gradient(135deg,#C17A3C,#8B5E3C)'};"></div><div class="video-card-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div><div class="video-card-info"><div class="video-card-title">${v.title}</div><div class="video-card-meta">${v.year} &middot; ${v.location}</div></div></a>`).join('');
+}).catch(()=>{document.getElementById('videoGrid').innerHTML='<p class="loading-text">Gagal memuat data.</p>';});
+</script>
+</body>
+</html>

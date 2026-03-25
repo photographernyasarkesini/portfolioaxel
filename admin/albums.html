@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Album — Admin Axel Ariel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#F4EFE6;--bg-alt:#EDE5D8;--bg-dark:#0D0805;--surface:#FDFAF6;
+      --text:#1C1612;--text-muted:#8C7B6B;--accent:#C17A3C;
+      --sidebar:#1C1612;--sidebar-w:240px;
+      --font-display:'DM Serif Display',serif;
+      --font-body:'Inter',sans-serif;
+      --font-mono:'Space Mono',monospace;
+    }
+    html,body{height:100%;font-family:var(--font-body);background:var(--bg);color:var(--text);}
+    body{display:flex;}
+
+    /* SIDEBAR */
+    .admin-sidebar{width:var(--sidebar-w);background:var(--sidebar);display:flex;flex-direction:column;min-height:100vh;position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto;}
+    .sidebar-header{padding:1.75rem 1.5rem 1.25rem;}
+    .sidebar-logo{font-family:var(--font-display);font-size:1.3rem;color:#FDFAF6;text-decoration:none;display:block;}
+    .sidebar-sublabel{font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(253,250,246,0.35);margin-top:0.25rem;}
+    .sidebar-badge{display:inline-flex;align-items:center;gap:5px;margin-top:0.75rem;padding:3px 8px;border-radius:20px;background:rgba(74,222,128,0.12);font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:#4ade80;}
+    .sidebar-badge-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;}
+    .sidebar-divider{height:1px;background:rgba(255,255,255,0.07);margin:0.75rem 0;}
+    .sidebar-nav{flex:1;padding:0.5rem 0;}
+    .sidebar-nav-label{font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(253,250,246,0.25);padding:0.5rem 1.5rem 0.35rem;}
+    .sidebar-link{display:flex;align-items:center;gap:0.75rem;padding:0.65rem 1.5rem;text-decoration:none;font-size:13px;color:rgba(253,250,246,0.55);transition:all 0.15s;}
+    .sidebar-link:hover{color:#FDFAF6;background:rgba(255,255,255,0.05);}
+    .sidebar-link.active{color:#FDFAF6;background:rgba(193,122,60,0.15);border-right:2px solid var(--accent);}
+    .sidebar-link svg{flex-shrink:0;opacity:0.6;}
+    .sidebar-link.active svg{opacity:1;}
+    .sidebar-footer{padding:1.25rem 1.5rem;border-top:1px solid rgba(255,255,255,0.07);}
+    .sidebar-site-link{display:block;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(253,250,246,0.3);text-decoration:none;margin-bottom:0.75rem;transition:color 0.15s;}
+    .sidebar-site-link:hover{color:var(--accent);}
+    .btn-logout{width:100%;padding:0.5rem 0.75rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:5px;cursor:pointer;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(253,250,246,0.4);transition:all 0.15s;}
+    .btn-logout:hover{background:rgba(193,122,60,0.15);color:var(--accent);border-color:rgba(193,122,60,0.3);}
+
+    /* MAIN */
+    .admin-main{margin-left:var(--sidebar-w);flex:1;padding:2.5rem;min-height:100vh;}
+    .admin-page-header{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;}
+    .admin-page-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem;}
+    .admin-page-title{font-family:var(--font-display);font-size:2rem;color:var(--text);}
+    .btn-toggle-form{padding:0.6rem 1.25rem;background:var(--accent);color:#1A0F08;border:none;border-radius:6px;cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;transition:opacity 0.2s;}
+    .btn-toggle-form:hover{opacity:0.85;}
+
+    .admin-card{background:var(--surface);border:1px solid rgba(28,22,18,0.08);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;}
+    .admin-card-title{font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(28,22,18,0.07);}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .form-group{margin-bottom:0;}
+    .form-group.full{grid-column:1/-1;}
+    .form-label{display:block;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem;}
+    .form-input,.form-select,.form-textarea{width:100%;padding:0.65rem 0.875rem;border:1px solid rgba(28,22,18,0.15);border-radius:6px;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:13px;outline:none;transition:border-color 0.2s;}
+    .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);}
+    .form-textarea{min-height:80px;resize:vertical;}
+    .form-output{width:100%;min-height:100px;padding:0.75rem;border:1px solid rgba(28,22,18,0.1);border-radius:6px;background:rgba(28,22,18,0.03);font-family:var(--font-mono);font-size:11px;color:var(--text-muted);resize:vertical;}
+    .checkbox-row{display:flex;align-items:center;gap:0.5rem;margin-top:0.25rem;}
+    .checkbox-row input{width:14px;height:14px;accent-color:var(--accent);}
+    .checkbox-row label{font-size:13px;color:var(--text);}
+
+    /* UPLOAD ZONE */
+    .upload-zone{
+      width:100%;min-height:100px;border:2px dashed rgba(28,22,18,0.2);border-radius:8px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:0.5rem;padding:1.5rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;
+    }
+    .upload-zone:hover{border-color:var(--accent);background:rgba(193,122,60,0.03);}
+    .upload-zone-icon{color:var(--text-muted);}
+    .upload-zone-text{font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);}
+    .upload-zone-sub{font-size:11px;color:rgba(140,123,107,0.6);}
+
+    .form-actions{display:flex;gap:0.75rem;margin-top:1.25rem;}
+    .btn-save{padding:0.6rem 1.5rem;background:var(--bg-dark);color:#FDFAF6;border:none;border-radius:6px;cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s;}
+    .btn-save:hover{background:var(--accent);color:#1A0F08;}
+    .btn-reset{padding:0.6rem 1.25rem;background:transparent;color:var(--text-muted);border:1px solid rgba(28,22,18,0.15);border-radius:6px;cursor:pointer;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;}
+    .btn-reset:hover{border-color:var(--text-muted);color:var(--text);}
+
+    .search-row{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+    .search-input{flex:1;padding:0.65rem 0.875rem;border:1px solid rgba(28,22,18,0.12);border-radius:6px;background:var(--surface);font-family:var(--font-body);font-size:13px;color:var(--text);outline:none;transition:border-color 0.2s;}
+    .search-input:focus{border-color:var(--accent);}
+
+    .table-wrap{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;font-size:13px;}
+    thead tr{border-bottom:2px solid rgba(28,22,18,0.1);}
+    th{padding:0.65rem 0.75rem;text-align:left;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap;}
+    tbody tr{border-bottom:1px solid rgba(28,22,18,0.05);transition:background 0.1s;}
+    tbody tr:hover{background:rgba(193,122,60,0.04);}
+    td{padding:0.65rem 0.75rem;color:var(--text);}
+    .td-title{max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .cat-pill{display:inline-block;padding:2px 7px;border-radius:3px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.05em;text-transform:uppercase;background:rgba(28,22,18,0.07);color:var(--text-muted);}
+    .featured-pill{display:inline-block;padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:8px;background:rgba(193,122,60,0.12);color:var(--accent);text-transform:uppercase;letter-spacing:0.06em;}
+    .table-actions{display:flex;gap:0.4rem;}
+    .btn-edit,.btn-del{padding:3px 10px;border:none;border-radius:4px;cursor:pointer;font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;}
+    .btn-edit{background:rgba(28,22,18,0.08);color:var(--text);transition:background 0.15s;}
+    .btn-edit:hover{background:rgba(28,22,18,0.15);}
+    .btn-del{background:rgba(220,38,38,0.08);color:#dc2626;transition:background 0.15s;}
+    .btn-del:hover{background:rgba(220,38,38,0.15);}
+
+    .form-section{display:none;}
+    .form-section.open{display:block;}
+
+    @media(max-width:768px){.admin-main{margin-left:0;padding:1.5rem;}.form-grid{grid-template-columns:1fr;}}
+
+    /* COVER PICKER MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(13,8,5,0.7);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.2s;}
+    .modal-overlay.open{opacity:1;pointer-events:auto;}
+    .modal-box{background:var(--surface);border-radius:12px;width:100%;max-width:780px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;}
+    .modal-header{padding:1.25rem 1.5rem;border-bottom:1px solid rgba(28,22,18,0.08);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+    .modal-title{font-family:var(--font-display);font-size:1.25rem;color:var(--text);}
+    .modal-subtitle{font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-top:2px;}
+    .modal-close{background:none;border:none;cursor:pointer;color:var(--text-muted);padding:4px;border-radius:4px;display:flex;align-items:center;justify-content:center;transition:color 0.15s;}
+    .modal-close:hover{color:var(--text);}
+    .modal-body{padding:1.25rem 1.5rem;overflow-y:auto;flex:1;}
+    .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.75rem;}
+    .photo-item{position:relative;aspect-ratio:3/2;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color 0.15s;}
+    .photo-item:hover{border-color:var(--accent);}
+    .photo-item.current-cover{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent);}
+    .photo-item img{width:100%;height:100%;object-fit:cover;display:block;}
+    .photo-item-badge{position:absolute;bottom:4px;left:4px;background:var(--accent);color:#fff;font-family:var(--font-mono);font-size:8px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 6px;border-radius:3px;}
+    .photo-item-hover{position:absolute;inset:0;background:rgba(13,8,5,0.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.15s;}
+    .photo-item:hover .photo-item-hover{opacity:1;}
+    .photo-item-hover span{font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:#fff;}
+    .modal-footer{padding:1rem 1.5rem;border-top:1px solid rgba(28,22,18,0.08);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+    .modal-status{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);}
+    .modal-status.saved{color:#22c55e;}
+    .modal-status.error{color:#dc2626;}
+
+    .btn-cover{padding:3px 10px;border:none;border-radius:4px;cursor:pointer;font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;background:rgba(193,122,60,0.1);color:var(--accent);transition:background 0.15s;}
+    .btn-cover:hover{background:rgba(193,122,60,0.2);}
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="admin-sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html" class="sidebar-logo">Axel Ariel</a>
+    <div class="sidebar-sublabel">Admin Panel</div>
+    <div class="sidebar-badge"><span class="sidebar-badge-dot"></span> Online</div>
+  </div>
+  <div class="sidebar-divider"></div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-label">Menu</div>
+    <a href="dashboard.html" class="sidebar-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="videos.html" class="sidebar-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.88v6.24a1 1 0 01-1.447.888L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+      Kelola Video
+    </a>
+    <a href="albums.html" class="sidebar-link active">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      Kelola Album
+    </a>
+    <a href="settings.html" class="sidebar-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Pengaturan
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="../index.html" class="sidebar-site-link" target="_blank">&#8599; Lihat Website</a>
+    <button class="btn-logout" onclick="logout()">Keluar</button>
+  </div>
+</aside>
+
+<!-- COVER PICKER MODAL -->
+<div class="modal-overlay" id="coverModal" onclick="handleModalOverlayClick(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalAlbumTitle">Pilih Cover</div>
+        <div class="modal-subtitle">Klik foto untuk set sebagai thumbnail album</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="photo-grid" id="modalPhotoGrid"></div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-status" id="modalStatus">Pilih foto di atas</div>
+      <button class="btn-reset" onclick="closeModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="admin-main">
+  <div class="admin-page-header">
+    <div>
+      <p class="admin-page-label">Admin Panel</p>
+      <h1 class="admin-page-title">Kelola Album Foto</h1>
+    </div>
+    <button class="btn-toggle-form" onclick="toggleForm()">+ Tambah Album</button>
+  </div>
+
+  <!-- FORM -->
+  <div class="admin-card form-section" id="albumForm">
+    <div class="admin-card-title" id="formTitle">Tambah Album Baru</div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label" for="aJudul">Judul Album</label>
+        <input class="form-input" type="text" id="aJudul" placeholder="Nama album">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="aKategori">Kategori</label>
+        <select class="form-select" id="aKategori">
+          <option value="">Pilih kategori</option>
+          <option value="wedding">Wedding</option>
+          <option value="prewedding">Prewedding</option>
+          <option value="portrait">Portrait</option>
+          <option value="graduation">Graduation</option>
+          <option value="event">Event</option>
+          <option value="product">Product</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="aTahun">Tahun</label>
+        <input class="form-input" type="text" id="aTahun" placeholder="2025">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="aLokasi">Lokasi</label>
+        <input class="form-input" type="text" id="aLokasi" placeholder="Batam, Indonesia">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="aKlien">Klien (opsional)</label>
+        <input class="form-input" type="text" id="aKlien" placeholder="Nama klien">
+      </div>
+      <div class="form-group full">
+        <div class="checkbox-row">
+          <input type="checkbox" id="aFeatured">
+          <label for="aFeatured">Tampilkan sebagai Featured</label>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="aDeskripsi">Deskripsi</label>
+        <textarea class="form-textarea" id="aDeskripsi" placeholder="Ceritakan tentang album ini..."></textarea>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Upload Foto</label>
+        <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+          <input type="file" id="fileInput" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+          <div class="upload-zone-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <span class="upload-zone-text">Klik untuk upload foto</span>
+          <span class="upload-zone-sub">JPG, PNG, WEBP — UI simulasi saja</span>
+        </div>
+        <div id="fileList" style="margin-top:0.75rem;font-size:12px;color:var(--text-muted);"></div>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Output JSON</label>
+        <textarea class="form-output" id="aJsonOut" readonly placeholder="JSON akan muncul di sini..."></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-save" onclick="generateAlbumJson()">Simpan &amp; Generate JSON</button>
+      <button class="btn-reset" onclick="resetAlbumForm()">Reset</button>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="admin-card">
+    <div class="admin-card-title">Daftar Album</div>
+    <div class="search-row">
+      <input class="search-input" type="text" id="searchInput" placeholder="Cari judul album..." oninput="filterTable()">
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Judul</th>
+            <th>Kategori</th>
+            <th>Tahun</th>
+            <th>Lokasi</th>
+            <th>Featured</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="albumTable">
+          <tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:2rem;font-size:13px;">Memuat...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+if(sessionStorage.getItem('admin_auth')!=='1'){window.location.href='index.html';}
+function logout(){sessionStorage.removeItem('admin_auth');window.location.href='index.html';}
+
+var allAlbums=[];
+
+function toggleForm(){
+  var f=document.getElementById('albumForm');
+  f.classList.toggle('open');
+  if(!f.classList.contains('open')){resetAlbumForm();}
+}
+
+function handleFiles(files){
+  var list=document.getElementById('fileList');
+  var names=Array.from(files).map(function(f){return f.name;});
+  list.textContent=names.length+' file dipilih: '+names.join(', ');
+}
+
+function generateAlbumJson(){
+  var obj={
+    id:'album-'+Date.now(),
+    title:document.getElementById('aJudul').value||'',
+    category:document.getElementById('aKategori').value||'',
+    year:document.getElementById('aTahun').value||'',
+    location:document.getElementById('aLokasi').value||'',
+    client:document.getElementById('aKlien').value||'',
+    featured:document.getElementById('aFeatured').checked,
+    description:document.getElementById('aDeskripsi').value||'',
+    cover:'',
+    photos:[]
+  };
+  document.getElementById('aJsonOut').value=JSON.stringify(obj,null,2);
+}
+
+function resetAlbumForm(){
+  ['aJudul','aTahun','aLokasi','aKlien','aDeskripsi','aJsonOut'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('aKategori').value='';
+  document.getElementById('aFeatured').checked=false;
+  document.getElementById('fileList').textContent='';
+  document.getElementById('formTitle').textContent='Tambah Album Baru';
+}
+
+function filterTable(){
+  var q=document.getElementById('searchInput').value.toLowerCase();
+  var rows=document.querySelectorAll('#albumTable tr[data-id]');
+  rows.forEach(function(r){
+    var title=r.querySelector('.td-title').textContent.toLowerCase();
+    r.style.display=title.includes(q)?'':'none';
+  });
+}
+
+function editAlbum(id){
+  var a=allAlbums.find(function(x){return x.id===id;});
+  if(!a)return;
+  document.getElementById('aJudul').value=a.title||'';
+  document.getElementById('aKategori').value=a.category||'';
+  document.getElementById('aTahun').value=a.year||'';
+  document.getElementById('aLokasi').value=a.location||'';
+  document.getElementById('aKlien').value=a.client||'';
+  document.getElementById('aFeatured').checked=!!a.featured;
+  document.getElementById('aDeskripsi').value=a.description||'';
+  document.getElementById('formTitle').textContent='Edit Album: '+a.title;
+  var f=document.getElementById('albumForm');
+  f.classList.add('open');
+  f.scrollIntoView({behavior:'smooth'});
+}
+
+function deleteAlbum(id){
+  if(!confirm('Hapus album "'+id+'"? Tindakan ini tidak bisa dibatalkan.'))return;
+  fetch('/api/delete',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({type:'album',id:id})
+  }).then(function(r){return r.json();}).then(function(res){
+    if(res.ok){
+      allAlbums=allAlbums.filter(function(a){return a.id!==id;});
+      document.querySelector('#albumTable tr[data-id="'+id+'"]').remove();
+    } else {
+      alert('Gagal hapus: '+(res.error||'error'));
+    }
+  }).catch(function(e){alert('Gagal: '+e.message);});
+}
+
+// --- COVER PICKER ---
+var currentCoverAlbum = null;
+
+function openCoverPicker(albumId) {
+  var a = allAlbums.find(function(x){ return x.id === albumId; });
+  if (!a || !a.photos || !a.photos.length) { alert('Album ini belum punya foto.'); return; }
+  currentCoverAlbum = a;
+  document.getElementById('modalAlbumTitle').textContent = a.title;
+  document.getElementById('modalStatus').textContent = 'Pilih foto di atas';
+  document.getElementById('modalStatus').className = 'modal-status';
+
+  var grid = document.getElementById('modalPhotoGrid');
+  grid.innerHTML = a.photos.map(function(photo) {
+    var isCurrent = photo === a.cover;
+    return '<div class="photo-item' + (isCurrent ? ' current-cover' : '') + '" onclick="setCover(\'' + photo.replace(/'/g, "\\'") + '\')" data-photo="' + photo.replace(/"/g, '&quot;') + '">'
+      + '<img src="../' + photo + '" loading="lazy" onerror="this.style.background=\'#ccc\'">'
+      + (isCurrent ? '<div class="photo-item-badge">Cover</div>' : '')
+      + '<div class="photo-item-hover"><span>Set Cover</span></div>'
+      + '</div>';
+  }).join('');
+
+  document.getElementById('coverModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('coverModal').classList.remove('open');
+  currentCoverAlbum = null;
+}
+
+function handleModalOverlayClick(e) {
+  if (e.target === document.getElementById('coverModal')) closeModal();
+}
+
+function setCover(photo) {
+  if (!currentCoverAlbum) return;
+  var albumId = currentCoverAlbum.id;
+  var statusEl = document.getElementById('modalStatus');
+  statusEl.textContent = 'Menyimpan...';
+  statusEl.className = 'modal-status';
+
+  fetch('/api/set-cover', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ albumId: albumId, cover: photo })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(res) {
+    if (res.ok) {
+      // update local data
+      currentCoverAlbum.cover = photo;
+      // update grid UI
+      var items = document.querySelectorAll('#modalPhotoGrid .photo-item');
+      items.forEach(function(item) {
+        var p = item.getAttribute('data-photo');
+        item.classList.remove('current-cover');
+        item.querySelector('.photo-item-badge') && item.querySelector('.photo-item-badge').remove();
+        if (p === photo) {
+          item.classList.add('current-cover');
+          var badge = document.createElement('div');
+          badge.className = 'photo-item-badge';
+          badge.textContent = 'Cover';
+          item.appendChild(badge);
+        }
+      });
+      statusEl.textContent = 'Tersimpan!';
+      statusEl.className = 'modal-status saved';
+    } else {
+      statusEl.textContent = 'Gagal menyimpan: ' + (res.error || 'error');
+      statusEl.className = 'modal-status error';
+    }
+  })
+  .catch(function(e) {
+    statusEl.textContent = 'Gagal: ' + e.message;
+    statusEl.className = 'modal-status error';
+  });
+}
+
+fetch('../data.json').then(function(r){return r.json();}).then(function(data){
+  allAlbums=data.albums||[];
+  var tbody=document.getElementById('albumTable');
+  if(!allAlbums.length){
+    tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:2rem;font-size:13px;">Belum ada album.</td></tr>';
+    return;
+  }
+  tbody.innerHTML=allAlbums.map(function(a,i){
+    return '<tr data-id="'+a.id+'">'
+      +'<td style="color:var(--text-muted);">'+(i+1)+'</td>'
+      +'<td class="td-title">'+a.title+'</td>'
+      +'<td><span class="cat-pill">'+a.category+'</span></td>'
+      +'<td>'+a.year+'</td>'
+      +'<td style="font-size:12px;">'+a.location+'</td>'
+      +'<td>'+(a.featured?'<span class="featured-pill">Yes</span>':'<span style="color:var(--text-muted);font-size:12px;">—</span>')+'</td>'
+      +'<td><div class="table-actions">'
+      +'<button class="btn-cover" onclick="openCoverPicker(\''+a.id+'\')">Cover</button>'
+      +'<button class="btn-edit" onclick="editAlbum(\''+a.id+'\')">Edit</button>'
+      +'<button class="btn-del" onclick="deleteAlbum(\''+a.id+'\')">Hapus</button>'
+      +'</div></td>'
+      +'</tr>';
+  }).join('');
+}).catch(function(){
+  document.getElementById('albumTable').innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:2rem;font-size:13px;">Gagal memuat data.</td></tr>';
+});
+</script>
+</body>
+</html>

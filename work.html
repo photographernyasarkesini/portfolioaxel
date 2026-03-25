@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karya — Axel Ariel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-transition"></div>
+
+<nav class="navbar solid">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">Axel Ariel</a>
+      <span class="nav-logo-sub">Freelance Fotografer &amp; Videografer</span>
+      <span class="nav-badge"><span class="nav-badge-dot"></span> Menerima Project</span>
+    </div>
+    <div class="nav-center">
+      <a href="index.html" class="nav-link">Beranda</a>
+      <a href="work.html" class="nav-link active">Karya</a>
+      <a href="about.html" class="nav-link">Tentang</a>
+      <a href="contact.html" class="nav-link">Kontak</a>
+    </div>
+    <a href="contact.html" class="nav-btn-hire">Hire Me</a>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Beranda</a>
+  <a href="work.html">Karya</a>
+  <a href="about.html">Tentang</a>
+  <a href="services.html">Layanan</a>
+  <a href="contact.html">Kontak</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-watermark">KARYA</div>
+  <div class="page-hero-inner">
+    <p class="page-hero-label">Portfolio</p>
+    <h1 class="page-hero-title">Karya &amp; <em>Cerita</em></h1>
+    <p class="page-hero-sub">Video cinematic, dokumentasi foto, dan konten kreatif dari Batam.</p>
+  </div>
+</div>
+<div class="gradient-strip"></div>
+
+<!-- SEMUA VIDEO -->
+<section class="section" style="background:var(--bg-dark);padding:5rem 0;">
+  <div class="section-inner">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <p class="cat-section-label" style="color:rgba(253,250,246,0.4);margin-bottom:0.5rem;">VIDEO</p>
+        <h2 class="section-title" style="color:#FDFAF6;margin-bottom:0;">Featured <em>Works</em></h2>
+      </div>
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <button id="fvPrev" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(253,250,246,0.2);background:transparent;color:rgba(253,250,246,0.7);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:border-color 0.2s,color 0.2s;">&#8592;</button>
+        <div id="fvDots" style="display:flex;gap:6px;align-items:center;"></div>
+        <button id="fvNext" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(253,250,246,0.2);background:transparent;color:rgba(253,250,246,0.7);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:border-color 0.2s,color 0.2s;">&#8594;</button>
+      </div>
+    </div>
+
+    <!-- Featured slider -->
+    <div id="fvSlider" style="position:relative;overflow:hidden;border-radius:8px;background:#0A0603;">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO SECTION -->
+<section class="section" style="background:var(--bg);">
+  <div class="section-inner">
+    <p class="cat-section-label">VIDEO</p>
+    <div class="category-grid">
+      <a href="video-wedding.html" class="category-card" data-vcat="wedding">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#C17A3C,#8B5E3C);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Video</span>
+          <div class="category-card-title">Wedding</div>
+          <div class="category-card-count" data-vcount="wedding"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="video-prewedding.html" class="category-card" data-vcat="prewedding">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#D4A574,#B8926A);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Video</span>
+          <div class="category-card-title">Prewedding</div>
+          <div class="category-card-count" data-vcount="prewedding"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="video-corporate.html" class="category-card" data-vcat="corporate">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#5C4B3A,#3D3025);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Video</span>
+          <div class="category-card-title">Corporate</div>
+          <div class="category-card-count" data-vcount="corporate"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="video-event.html" class="category-card" data-vcat="event">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#8B6B4A,#6B4E35);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Video</span>
+          <div class="category-card-title">Event</div>
+          <div class="category-card-count" data-vcount="event"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="video-documentary.html" class="category-card" data-vcat="documentary">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#7B5E42,#5A4330);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Video</span>
+          <div class="category-card-title">Documentary</div>
+          <div class="category-card-count" data-vcount="documentary"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="video-socialmedia.html" class="category-card" data-vcat="socialmedia">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#E8CFA0,#C8A870);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Video</span>
+          <div class="category-card-title">Social Media</div>
+          <div class="category-card-count" data-vcount="socialmedia"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="video-product.html" class="category-card" data-vcat="product">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#A0785A,#7A5840);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Video</span>
+          <div class="category-card-title">Product</div>
+          <div class="category-card-count" data-vcount="product"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOTO SECTION -->
+<section class="section" style="background:var(--bg-alt);">
+  <div class="section-inner">
+    <p class="cat-section-label">FOTO</p>
+    <div class="category-grid">
+      <a href="foto-wedding.html" class="category-card category-card-foto" data-fcat="wedding">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#C17A3C,#8B5E3C);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Foto</span>
+          <div class="category-card-title">Wedding</div>
+          <div class="category-card-count" data-fcount="wedding"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="foto-prewedding.html" class="category-card category-card-foto" data-fcat="prewedding">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#D4A574,#B8926A);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Foto</span>
+          <div class="category-card-title">Prewedding</div>
+          <div class="category-card-count" data-fcount="prewedding"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="foto-portrait.html" class="category-card category-card-foto" data-fcat="portrait">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#D4A574,#A8825A);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Foto</span>
+          <div class="category-card-title">Portrait</div>
+          <div class="category-card-count" data-fcount="portrait"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="foto-event.html" class="category-card category-card-foto" data-fcat="event">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#8B6B4A,#6B4E35);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Foto</span>
+          <div class="category-card-title">Event</div>
+          <div class="category-card-count" data-fcount="event"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="foto-product.html" class="category-card category-card-foto" data-fcat="product">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#5C4B3A,#3D3025);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Foto</span>
+          <div class="category-card-title">Product</div>
+          <div class="category-card-count" data-fcount="product"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="foto-graduation.html" class="category-card category-card-foto" data-fcat="graduation">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#C17A3C,#956030);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Foto</span>
+          <div class="category-card-title">Graduation</div>
+          <div class="category-card-count" data-fcount="graduation"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+      <a href="foto-analog.html" class="category-card category-card-foto" data-fcat="analog">
+        <div class="category-card-img" style="background:linear-gradient(135deg,#5C4535,#1E1510);"></div>
+        <div class="category-card-ov"></div>
+        <div class="category-card-info">
+          <span class="category-card-label">Foto</span>
+          <div class="category-card-title">Analog</div>
+          <div class="category-card-count" data-fcount="analog"></div>
+        </div>
+        <span class="category-card-arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <h2 class="cta-title">Tertarik Bekerja Sama? <em>Hubungi Saya.</em></h2>
+  <p class="cta-sub">Senin–Sabtu, 09.00–21.00 WIB.</p>
+  <div class="cta-actions">
+    <a href="https://wa.me/6285542200957" target="_blank" class="btn btn-amber">WhatsApp Sekarang</a>
+    <a href="contact.html" class="btn btn-outline">Form Kontak</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-cta-box">
+    <div class="footer-cta-inner">
+      <p class="footer-cta-text">Punya project? <em>Ayo mulai.</em></p>
+      <a href="contact.html" class="btn btn-amber">Hubungi Sekarang</a>
+    </div>
+  </div>
+  <div class="footer-cols">
+    <div>
+      <a href="index.html" class="footer-logo">Axel Ariel</a>
+      <p class="footer-tagline">Freelance Fotografer &amp; Videografer</p>
+      <p class="footer-bio">Videografer dan fotografer berbasis di Batam.</p>
+      <div class="footer-watermark">AA</div>
+    </div>
+    <div>
+      <p class="footer-col-title">Navigasi</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="work.html">Karya</a></li>
+        <li><a href="about.html">Tentang</a></li>
+        <li><a href="services.html">Layanan</a></li>
+        <li><a href="contact.html">Kontak</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Video</p>
+      <ul class="footer-links">
+        <li><a href="video-wedding.html">Wedding</a></li>
+        <li><a href="video-corporate.html">Corporate</a></li>
+        <li><a href="video-event.html">Event</a></li>
+        <li><a href="video-documentary.html">Documentary</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Kontak</p>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/6285542200957" target="_blank">+62 855-4220-0957</a></li>
+        <li><a href="mailto:axelarielmuhammad@gmail.com">axelarielmuhammad@gmail.com</a></li>
+        <li><a href="https://instagram.com/shotbyaxell" target="_blank">@shotbyaxell</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 Axel Ariel. All rights reserved.</span>
+    <span>Batam, Indonesia</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/6285542200957" target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.527 5.845L.057 23.272a.75.75 0 00.916.948l5.598-1.469A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.661-.513-5.185-1.407l-.371-.22-3.847 1.01.976-3.734-.242-.384A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  WhatsApp
+</a>
+<script src="main.js"></script>
+<script>
+/* ── FEATURED VIDEO SLIDER ── */
+(function(){
+  const slider  = document.getElementById('fvSlider');
+  const dotsEl  = document.getElementById('fvDots');
+  const prevBtn = document.getElementById('fvPrev');
+  const nextBtn = document.getElementById('fvNext');
+  if(!slider) return;
+
+  const CAT_LBL = {wedding:'Wedding',prewedding:'Prewedding',corporate:'Corporate',event:'Event',documentary:'Documentary',socialmedia:'Social Media',product:'Product'};
+  let vids=[], idx=0, timer=null;
+
+  function render(){
+    const v = vids[idx];
+    slider.innerHTML = `
+      <a href="https://youtu.be/${v.youtube_id}" target="_blank" rel="noopener"
+         style="display:block;position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:8px;text-decoration:none;">
+        <div style="position:absolute;inset:0;background:url(https://img.youtube.com/vi/${v.youtube_id}/maxresdefault.jpg) center/cover;
+          transition:transform 0.6s ease;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,6,3,0.85) 0%,rgba(10,6,3,0.2) 50%,transparent 100%);"></div>
+        <div style="position:absolute;bottom:0;left:0;padding:2.5rem 2rem;">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+            color:var(--accent);background:rgba(193,122,60,0.15);padding:4px 10px;border-radius:100px;border:1px solid rgba(193,122,60,0.3);">
+            ${CAT_LBL[v.category]||v.category} &middot; ${v.year}
+          </span>
+          <div style="font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2.2rem);color:#FDFAF6;
+            margin-top:0.75rem;line-height:1.2;">${v.title}</div>
+        </div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+          width:64px;height:64px;background:rgba(193,122,60,0.85);border-radius:50%;
+          display:flex;align-items:center;justify-content:center;opacity:0.9;transition:opacity 0.2s;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </a>`;
+
+    // dots
+    dotsEl.innerHTML = vids.map((_,i)=>`
+      <span onclick="fvGo(${i})" style="width:${i===idx?20:6}px;height:6px;border-radius:100px;
+        background:${i===idx?'var(--accent)':'rgba(253,250,246,0.25)'};cursor:pointer;
+        transition:width 0.3s,background 0.3s;display:inline-block;"></span>
+    `).join('');
+  }
+
+  window.fvGo = function(i){ idx=i; render(); startTimer(); };
+
+  function startTimer(){
+    clearInterval(timer);
+    timer = setInterval(()=>{ idx=(idx+1)%vids.length; render(); }, 4000);
+  }
+
+  fetch('data.json').then(r=>r.json()).then(data=>{
+    vids = data.videos.filter(v=>v.featured && v.youtube_id && v.youtube_id!=='YOUTUBE_ID_DI_SINI');
+    if(!vids.length) return;
+    render();
+    startTimer();
+    prevBtn.onclick = ()=>{ idx=(idx-1+vids.length)%vids.length; render(); startTimer(); };
+    nextBtn.onclick = ()=>{ idx=(idx+1)%vids.length; render(); startTimer(); };
+    slider.addEventListener('mouseenter', ()=>clearInterval(timer));
+    slider.addEventListener('mouseleave', startTimer);
+  });
+})();
+</script>
+<script>
+function makeSlider(imgBox, srcs) {
+  if(!srcs.length) return;
+  if(srcs.length === 1) { imgBox.style.background = `url(${srcs[0]}) center/cover`; return; }
+
+  imgBox.style.background = 'none';
+  imgBox.style.position = 'absolute';
+  imgBox.style.inset = '0';
+  imgBox.innerHTML = srcs.map((src, i) => `
+    <div style="position:absolute;inset:0;background:url(${src}) center/cover;
+      opacity:${i===0?1:0};transition:opacity 0.8s ease;"></div>
+  `).join('');
+
+  let idx = 0;
+  const slides = imgBox.querySelectorAll('div');
+  setInterval(()=>{
+    slides[idx].style.opacity = '0';
+    idx = (idx + 1) % slides.length;
+    slides[idx].style.opacity = '1';
+  }, 2500);
+}
+
+fetch('data.json').then(r=>r.json()).then(data=>{
+
+  /* ── FOTO CATEGORIES ── */
+  document.querySelectorAll('[data-fcat]').forEach(card=>{
+    const cat = card.dataset.fcat;
+    const albums = data.albums.filter(a=>a.category===cat);
+    const covers = albums.map(a=>a.cover).filter(Boolean);
+    const countEl = card.querySelector('[data-fcount]');
+    if(countEl) countEl.textContent = albums.length + ' album';
+    makeSlider(card.querySelector('.category-card-img'), covers);
+  });
+
+  /* ── VIDEO CATEGORIES ── */
+  document.querySelectorAll('[data-vcat]').forEach(card=>{
+    const cat = card.dataset.vcat;
+    const vids = data.videos.filter(v=>v.category===cat);
+    const countEl = card.querySelector('[data-vcount]');
+    if(countEl) countEl.textContent = vids.length + ' video';
+    const thumbs = vids
+      .filter(v=>v.youtube_id && v.youtube_id!=='YOUTUBE_ID_DI_SINI')
+      .map(v=>`https://img.youtube.com/vi/${v.youtube_id}/mqdefault.jpg`);
+    makeSlider(card.querySelector('.category-card-img'), thumbs);
+  });
+});
+</script>
+</body>
+</html>

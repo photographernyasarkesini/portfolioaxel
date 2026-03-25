@@ -1,0 +1,8 @@
+node_modules/
+.env
+*.log
+temporary screenshots/
+Foto Foto/
+Foto Pilihan Website/
+govindarumi.com_*.png
+IMG_*.JPG
